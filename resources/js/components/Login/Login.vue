@@ -81,6 +81,12 @@ export default {
   components: { Spinner },
   data() {
     return {
+      user: {
+        firstName: "",
+        lastName: "",
+        image: "",
+        department_id: 0,
+      },
       isLoaded: true,
       form: {
         username: "",
@@ -100,11 +106,25 @@ export default {
       User.login(this.form)
         .then((res) => {
           localStorage.setItem("token", res.data);
-          if (this.$route.query.redirect) {
-            this.$router.push(this.$route.query.redirect);
-          } 
-          else 
-          this.$router.push({ name: "Home" });
+          User.user()
+            .then((res) => {
+              this.user.firstName = res.data.first_name;
+              this.user.lastName = res.data.last_name;
+              this.user.image = res.data.image;
+              this.user.department_id = res.data.department_id;
+              this.setUser(this.user);
+              this.isLoaded = true;
+              if (this.$route.query.redirect) {
+                this.$router.push(this.$route.query.redirect);
+              } else this.$router.push({ name: "Home" });
+            })
+            .catch((err) => {
+              if (err.response.status == 401) {
+                localStorage.removeItem("token");
+                this.$router.push({ name: "Login" });
+              }
+              this.isLoaded = true;
+            });
         })
         .catch((err) => {
           if (err.response.status == 422)

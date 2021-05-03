@@ -40,25 +40,23 @@ router.beforeEach((to, from, next) => {
       })
     } else {
       if (to.matched.some(record => record.meta.QuanLyOnly)) {
-        if (store.getters.isQuanLy) {
+        if(store.getters.isQuanLy){
           next();
-        } else {
-          next({
-            name: 'error403'
-          });
         }
-      } else
-        next()
-    }
+        else
+        next({
+          name: 'error403'
+        })
+      }
+      else
+        next();
+    };
   } else if (to.matched.some(record => record.meta.guestOnly)) {
     if (localStorage.getItem('token')) {
-      next({
-        path: '/'
-      })
-    } else {
-      next()
-    }
-  } else {
+      next({name: 'Home'})
+    } else next();
+  }
+  else {
     next();
   }
 })

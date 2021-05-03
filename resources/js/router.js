@@ -11,6 +11,7 @@ import error403 from './views/403'
 import Staff from './components/Staff/Staff.vue'
 import StaffIndex from './components/Staff/StaffIndex.vue'
 import StaffCreate from './components/Staff/StaffCreate.vue'
+import StaffEdit from './components/Staff/StaffEdit.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -53,6 +54,15 @@ export const router = new VueRouter({
           path: 'create',
           name: 'StaffCreate',
           component: StaffCreate,
+          meta:{
+            authOnly: true,
+            // QuanLyOnly: true,
+          },
+        },
+        {
+          path: '/:id/edit',
+          name: 'StaffEdit',
+          component: StaffEdit,
           meta:{
             authOnly: true,
             // QuanLyOnly: true,
