@@ -85,7 +85,7 @@
       </b-table>
       <b-row>
         <b-col md="6">
-          <small class="form-text text-muted"> Từ {{(currentPage - 1) * perPage + 1}} đến {{(perPage*currentPage>totalRows)?totalRows:perPage*currentPage}} trong {{totalRows}}</small>
+          <small class="form-text text-muted"> Từ {{(currentPage - 1) * perPage + 1}} đến {{(perPage*currentPage>totalRows)?totalRows:perPage*currentPage}} trong {{totalRows}} kết quả</small>
         </b-col>
         <b-col md="6">
           <b-pagination
