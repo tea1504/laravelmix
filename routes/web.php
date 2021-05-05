@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::prefix('api')->group(function () {
     Route::post('login', [LoginController::class, 'login']);

@@ -165,10 +165,11 @@
           :state="Boolean(staff.image)"
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
+          @change="change"
         ></b-form-file>
+        <img id="output" src="default.png" class="mt-2" height="150px" />
       </b-form-group>
     </b-card>
-    {{ staff }}
   </div>
 </template>
 
@@ -205,6 +206,16 @@ export default {
         labelHelp: "Sử dụng các phím con trỏ để duyệt ngày tháng",
       },
     };
+  },
+  methods: {
+    change(e) {
+      this.staff.image = e.target.files[0];
+      this.loadFile(e);
+    },
+    loadFile(e) {
+      var output = document.getElementById("output");
+      output.src = URL.createObjectURL(e.target.files[0]);
+    },
   },
 };
 </script>

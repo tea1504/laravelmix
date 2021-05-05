@@ -22,3 +22,5 @@ Route::post('login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     
 });
+
+Route::get('/img/{thumuc}/{tenhinh}', [ImageController::class, 'get']);
