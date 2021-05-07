@@ -102,7 +102,7 @@
       size="xl"
       scrollable
       title="Chỉnh sửa bộ phận"
-      @ok="update"
+      hide-footer
     >
       <department-edit :id="id" />
     </b-modal>
@@ -113,12 +113,8 @@
       title="Thêm mới bộ phận"
       header-bg-variant="teal"
       hide-footer
-      @ok="create"
     >
-      <department-create/>
-      <b-button>
-        Lưu
-      </b-button>
+      <department-create :isLoaded="isLoaded" />
     </b-modal>
   </div>
 </template>
@@ -147,12 +143,6 @@ export default {
     };
   },
   methods: {
-    update() {
-      console.log("update");
-    },
-    create() {
-      console.log("create");
-    },
   },
   computed: {
     ...mapGetters(["getDepartment", "getFieldsDepartment"]),

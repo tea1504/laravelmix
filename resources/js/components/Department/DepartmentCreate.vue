@@ -20,11 +20,20 @@
         {{ errors.name[0] }}
       </b-form-invalid-feedback>
     </b-form-group>
+    <b-row>
+      <b-col offset="2">
+        <b-button class="bg-teal border-0" @click="create">Lưu</b-button>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
+import Department from "../../apis/Department";
 export default {
+  props: {
+    isLoaded: Boolean,
+  },
   data() {
     return {
       department: {
@@ -32,6 +41,18 @@ export default {
       },
       errors: [],
     };
+  },
+  methods: {
+    create() {
+      this.isLoaded = false;
+      Department.create()
+        .then((res) => {
+          this.isLoaded = true;
+        })
+        .catch((err) => {
+          this.isLoaded = true;
+        });
+    },
   },
   filters: {
     check: function (value) {
