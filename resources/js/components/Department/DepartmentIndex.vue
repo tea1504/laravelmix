@@ -14,6 +14,7 @@
         outlined
         sticky-header="500px"
         :items="getDepartment"
+        :fields="getFieldsDepartment"
       >
       </b-table>
     </b-card>
@@ -38,7 +39,7 @@ export default {
   },
   methods: {},
   computed: {
-    ...mapGetters(["getDepartment"]),
+    ...mapGetters(["getDepartment", "getFieldsDepartment"]),
   },
 };
 </script>
