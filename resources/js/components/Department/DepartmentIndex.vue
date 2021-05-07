@@ -15,7 +15,14 @@
         sticky-header="500px"
         :items="getDepartment"
         :fields="getFieldsDepartment"
+        :busy="isLoaded"
       >
+        <template #table-busy>
+          <div class="text-center text-success my-2">
+            <b-spinner class="align-middle"></b-spinner>
+            <strong>Loading...</strong>
+          </div>
+        </template>
       </b-table>
     </b-card>
   </div>
@@ -24,6 +31,9 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  props: {
+    isLoaded: Boolean,
+  },
   data() {
     return {
       totalRows: 1,

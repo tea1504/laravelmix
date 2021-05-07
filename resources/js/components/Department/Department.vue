@@ -1,6 +1,6 @@
 <template>
   <div class="content pt-1">
-    <router-view />
+    <router-view :isLoaded="isLoaded" />
     <spinner v-if="!isLoaded" />
   </div>
 </template>
