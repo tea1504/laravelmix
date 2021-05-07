@@ -31,7 +31,7 @@ class DepartmentRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.require' => 'Bạn phải nhập tên bộ phận'
+            'name.required' => 'Bạn phải nhập tên bộ phận'
         ];
     }
 }
