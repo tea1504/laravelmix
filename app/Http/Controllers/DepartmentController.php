@@ -87,13 +87,15 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        $department->delete();
+        return response()->json('ok');
     }
 
     public function get()
     {
-        return Response()->json(Department::all());
+        return response()->json(Department::all());
     }
 }

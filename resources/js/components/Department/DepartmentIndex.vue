@@ -105,7 +105,7 @@
       title="Chỉnh sửa bộ phận"
       hide-footer
     >
-      <department-edit :id="id"/>
+      <department-edit :id="id" />
     </b-modal>
     <b-modal
       id="modal-create"
@@ -115,15 +115,19 @@
       header-bg-variant="teal"
       hide-footer
     >
-      <department-create v-on:loading="$emit('loading')" v-on:loaded="$emit('loaded')"/>
+      <department-create
+        v-on:loading="$emit('loading')"
+        v-on:loaded="$emit('loaded')"
+      />
     </b-modal>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import DepartmentEdit from "./DepartmentEdit.vue";
 import DepartmentCreate from "./DepartmentCreate";
+import Department from "../../apis/Department";
 export default {
   components: { DepartmentEdit, DepartmentCreate },
   props: {
@@ -144,9 +148,49 @@ export default {
     };
   },
   methods: {
-    xoa(id){
-      console.log(id);
-    }
+    ...mapActions(["setDepartment"]),
+    departmentIndex() {
+      this.$emit("loading");
+      Department.index()
+        .then((res) => {
+          this.setDepartment(res.data);
+          this.$emit("loaded");
+        })
+        .catch((err) => {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          }
+          this.$emit("loaded");
+        });
+    },
+    xoa(id) {
+      this.$swal({
+        title: "Bạn chắc chắn muốn xóa?",
+        showCancelButton: true,
+        confirmButtonText: `Xóa`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit("loading");
+          Department.delete(id)
+            .then((res) => {
+              this.$swal("Đã xóa thành công").then(() => {
+                this.departmentIndex();
+              });
+              this.$emit("loaded");
+            })
+            .catch((err) => {
+              if (err.response.status == 401) {
+                localStorage.removeItem("token");
+                this.$router.push({ name: "Login" });
+              }
+              this.$emit("loaded");
+            });
+        } else {
+          this.$swal("Đã hủy xóa");
+        }
+      });
+    },
   },
   computed: {
     ...mapGetters(["getDepartment", "getFieldsDepartment"]),
