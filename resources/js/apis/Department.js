@@ -9,5 +9,8 @@ export default {
   },
   create(form){
     return Api().post('/department', form);
+  },
+  show(id){
+    return Api().get('/department/'+id);
   }
 }
