@@ -43,18 +43,18 @@ export default {
   methods: {
     ...mapActions(["setDepartment"]),
     departmentIndex() {
-      this.isLoaded = false;
+      this.$emit("loading");
       Department.index()
         .then((res) => {
           this.setDepartment(res.data);
-          this.isLoaded = true;
+          this.$emit("loaded");
         })
         .catch((err) => {
           if (err.response.status == 401) {
             localStorage.removeItem("token");
             this.$router.push({ name: "Login" });
           }
-          this.isLoaded = true;
+          this.$emit("loaded");
         });
     },
     create() {
