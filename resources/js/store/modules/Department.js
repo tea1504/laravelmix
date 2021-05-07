@@ -1,4 +1,6 @@
-const state = {}
+const state = {
+  department: []
+}
 
 const getters = {}
 
