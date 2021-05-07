@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view/>
+    <router-view :isLoaded="isLoaded"/>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   data(){
     return {
-      isLoaded: true,
+      isLoaded: false,
     }
   }
 }
