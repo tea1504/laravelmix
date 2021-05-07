@@ -4,7 +4,7 @@
       header="Danh sách các bộ phận"
       header-class="h1 font-weight-bold bg-gradient-teal"
     >
-      <b-button class="bg-teal border-0 mb-1">
+      <b-button v-b-modal.modal-create class="bg-teal border-0 mb-1">
         <i class="fas fa-plus"></i> Thêm mới
       </b-button>
       <b-row>
@@ -53,7 +53,8 @@
         </template>
         <template #cell(actions)="row">
           <b-button
-            v-b-modal.modal-1
+            v-b-modal.modal-edit
+            @click="id = row.item.id"
             size="sm"
             pill
             class="bg-teal"
@@ -96,7 +97,10 @@
         </b-col>
       </b-row>
     </b-card>
-    <b-modal id="modal-1" title="BootstrapVue">
+    <b-modal id="modal-edit" title="BootstrapVue">
+      <p class="my-4">Hello from modal! {{ id }}</p>
+    </b-modal>
+    <b-modal id="modal-create" title="BootstrapVue">
       <p class="my-4">Hello from modal!</p>
     </b-modal>
   </div>
@@ -119,6 +123,7 @@ export default {
       sortDirection: "asc",
       filter: null,
       filterOn: [],
+      id: 0,
     };
   },
   methods: {},
