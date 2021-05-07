@@ -8,7 +8,11 @@ const getters = {
   }
 }
 
-const mutations = {}
+const mutations = {
+  setDepartment(state, department){
+    state.department = department;
+  }
+}
 
 const actions = {}
 
