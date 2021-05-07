@@ -13,6 +13,7 @@ import StaffIndex from './components/Staff/StaffIndex.vue'
 import StaffCreate from './components/Staff/StaffCreate.vue'
 import StaffEdit from './components/Staff/StaffEdit.vue'
 import Department from './components/Department/Department.vue'
+import DepartmentIndex from './components/Department/DepartmentIndex.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -79,6 +80,13 @@ export const router = new VueRouter({
           authOnly: true,
           //QuanLyOnly: true
         },
+        children: [
+          {
+            path: '',
+            name: 'DepartmentIndex',
+            component: DepartmentIndex,
+          }
+        ],
       },
     ]
   },
