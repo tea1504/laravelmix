@@ -23,6 +23,12 @@
             <strong>Loading...</strong>
           </div>
         </template>
+        <template #cell(created_at)="row">
+          {{ row.value | date }}
+        </template>
+        <template #cell(updated_at)="row">
+          {{ row.value | date }}
+        </template>
       </b-table>
     </b-card>
   </div>
