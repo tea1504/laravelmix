@@ -4,6 +4,7 @@ import VueX from 'vuex'
 import User from './modules/User'
 import Staff from './modules/Staff'
 import Department from './modules/Department'
+import Table from './modules/Table'
 
 Vue.use(VueX);
 
@@ -12,5 +13,6 @@ export const store = new VueX.Store({
         User,
         Staff,
         Department,
+        Table,
     }
 });
