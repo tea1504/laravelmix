@@ -8,12 +8,20 @@
         <i class="fas fa-plus"></i> Thêm mới
       </b-button>
 
-      <b-table striped hover outlined sticky-header="500px"> </b-table>
+      <b-table
+        striped
+        hover
+        outlined
+        sticky-header="500px"
+        :items="getDepartment"
+      >
+      </b-table>
     </b-card>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -27,6 +35,10 @@ export default {
       filter: null,
       filterOn: [],
     };
+  },
+  methods: {},
+  computed: {
+    ...mapGetters(["getDepartment"]),
   },
 };
 </script>
