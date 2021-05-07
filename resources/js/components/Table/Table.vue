@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Table from "../../apis/Table";
 export default {
   data() {
@@ -13,11 +14,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setTable"]),
     tableIndex() {
       this.isLoaded = false;
       Table.index()
         .then((res) => {
-          console.log(res);
+          this.setTable(res.data);
           this.isLoaded = true;
         })
         .catch((err) => {
