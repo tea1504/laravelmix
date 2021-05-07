@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import Department from "../../apis/Department";
 export default {
   props: {
     id: Number,
@@ -43,11 +45,18 @@ export default {
   },
   methods: {
     ...mapActions(["setDepartment"]),
-    show(){
-      this.$emit('loading');
+    show() {
+      this.$emit("loading");
+      Department.show(id)
+        .then((res) => {
+          this.$emit("loaded");
+        })
+        .catch((err) => {
+          this.$emit("loaded");
+        });
     },
     departmentIndex() {
-      this.$emit('loading');
+      this.$emit("loading");
       Department.index()
         .then((res) => {
           this.setDepartment(res.data);
@@ -67,6 +76,9 @@ export default {
       return value == null ? null : false;
     },
   },
+  mounted(){
+    this.show();
+  }
 };
 </script>
 
