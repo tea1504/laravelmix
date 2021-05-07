@@ -12,6 +12,7 @@ import Staff from './components/Staff/Staff.vue'
 import StaffIndex from './components/Staff/StaffIndex.vue'
 import StaffCreate from './components/Staff/StaffCreate.vue'
 import StaffEdit from './components/Staff/StaffEdit.vue'
+import Department from './components/Department/Department.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -25,52 +26,61 @@ export const router = new VueRouter({
     },
     children: [
       {
-      path: '',
-      name: 'Home',
-      component: Home,
-      meta: {
-        authOnly: true,
-      }
-    },
-    {
-      path: 'staff',
-      name: 'Staff',
-      component: Staff,
-      meta:{
-        authOnly: true,
-        // QuanLyOnly: true,
+        path: '',
+        name: 'Home',
+        component: Home,
+        meta: {
+          authOnly: true,
+        }
       },
-      children: [
-        {
-          path: '',
-          name: 'StaffIndex',
-          component: StaffIndex,
-          meta:{
-            authOnly: true,
-            // QuanLyOnly: true,
-          },
+      {
+        path: 'staff',
+        name: 'Staff',
+        component: Staff,
+        meta: {
+          authOnly: true,
+          // QuanLyOnly: true,
         },
-        {
-          path: 'create',
-          name: 'StaffCreate',
-          component: StaffCreate,
-          meta:{
-            authOnly: true,
-            // QuanLyOnly: true,
+        children: [
+          {
+            path: '',
+            name: 'StaffIndex',
+            component: StaffIndex,
+            meta: {
+              authOnly: true,
+              // QuanLyOnly: true,
+            },
           },
-        },
-        {
-          path: '/:id/edit',
-          name: 'StaffEdit',
-          component: StaffEdit,
-          meta:{
-            authOnly: true,
-            // QuanLyOnly: true,
+          {
+            path: 'create',
+            name: 'StaffCreate',
+            component: StaffCreate,
+            meta: {
+              authOnly: true,
+              // QuanLyOnly: true,
+            },
           },
+          {
+            path: '/:id/edit',
+            name: 'StaffEdit',
+            component: StaffEdit,
+            meta: {
+              authOnly: true,
+              // QuanLyOnly: true,
+            },
+          },
+        ]
+      },
+      {
+        path: 'department',
+        name: 'Department',
+        component: Department,
+        meta: {
+          authOnly: true,
+          //QuanLyOnly: true
         },
-      ]
-    }
-  ]
+      },
+    ]
   },
   {
     path: '/login',
