@@ -2,7 +2,7 @@
   <div>
     <spinner v-if="!isLoaded" />
     <b-card
-      header="Danh sách các bộ phận"
+      header="Danh sách bàn"
       header-class="h1 font-weight-bold bg-gradient-teal"
     >
       <b-button v-b-modal.modal-create class="bg-teal border-0 mb-1">
@@ -103,7 +103,8 @@
       id="modal-edit"
       size="xl"
       scrollable
-      title="Chỉnh sửa bộ phận"
+      title="Chỉnh sửa bàn"
+      header-bg-variant="teal"
       hide-footer
     >
       <table-edit :id="id" />
@@ -112,7 +113,7 @@
       id="modal-create"
       size="xl"
       scrollable
-      title="Thêm mới bộ phận"
+      title="Thêm mới bàn"
       header-bg-variant="teal"
       hide-footer
     >
@@ -126,6 +127,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Table from "../../apis/Table";
 import Spinner from "../../views/Spinner.vue";
 import TableCreate from "./TableCreate.vue";
 import TableEdit from "./TableEdit.vue";
@@ -150,12 +152,12 @@ export default {
   },
   methods: {
     ...mapActions(["setTable"]),
-    departmentIndex() {
-      this.$emit("loading");
-      Department.index()
+    tableIndex() {
+      this.isLoaded = false;
+      Table.index()
         .then((res) => {
-          this.setDepartment(res.data);
-          this.$emit("loaded");
+          this.setTable(res.data);
+          this.isLoaded = true;
         })
         .catch((err) => {
           if (err.response.status == 401) {
@@ -167,7 +169,7 @@ export default {
               },
             });
           }
-          this.$emit("loaded");
+          this.isLoaded = true;
         });
     },
     xoa(id) {
@@ -178,17 +180,22 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.$emit("loading");
-          Department.delete(id)
+          Table.delete(id)
             .then((res) => {
               this.$swal("Đã xóa thành công").then(() => {
-                this.departmentIndex();
+                this.tableIndex();
               });
               this.$emit("loaded");
             })
             .catch((err) => {
               if (err.response.status == 401) {
                 localStorage.removeItem("token");
-                this.$router.push({ name: "Login" });
+                this.$router.push({
+                  name: "Login",
+                  query: {
+                    redirect: to.fullPath,
+                  },
+                });
               }
               this.$emit("loaded");
             });
