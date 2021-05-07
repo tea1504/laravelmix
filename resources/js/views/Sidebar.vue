@@ -36,6 +36,21 @@
             >
           </li>
         </ul>
+        <ul
+          class="nav nav-pills nav-sidebar flex-column"
+          data-widget="treeview"
+          role="menu"
+          data-accordion="false"
+        >
+          <li class="nav-item" v-if="isQuanLy">
+            <router-link
+              tag="a"
+              class="nav-link"
+              :to="{ name: 'DepartmentIndex' }"
+              ><i class="nav-icon fas fa-address-book"></i><p>Bộ phận</p></router-link
+            >
+          </li>
+        </ul>
       </nav>
     </div>
   </aside>
