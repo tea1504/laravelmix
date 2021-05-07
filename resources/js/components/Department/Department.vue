@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content pt-1">
     <router-view />
     <spinner v-if="!isLoaded" />
   </div>
