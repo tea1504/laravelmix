@@ -7,7 +7,25 @@
       <b-button class="bg-teal border-0 mb-1">
         <i class="fas fa-plus"></i> Thêm mới
       </b-button>
-
+      <b-row>
+        <b-col md="6">
+          <b-form-group label="Số dòng" label-align="left" label-cols-sm="2">
+            <b-form-select
+              v-model="perPage"
+              :options="pageOptions"
+            ></b-form-select>
+          </b-form-group>
+        </b-col>
+        <b-col md="6">
+          <b-form-group label="Tìm kiếm" label-align="right" label-cols-sm="2">
+            <b-form-input
+              v-model="filter"
+              type="search"
+              placeholder="Nhập để tìm kiếm"
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
       <b-table
         striped
         hover
@@ -16,6 +34,10 @@
         :items="getDepartment"
         :fields="getFieldsDepartment"
         :busy="!isLoaded"
+        :per-page="perPage"
+        :current-page="currentPage"
+        :filter="filter"
+        :filter-included-fields="filterOn"
       >
         <template #table-busy>
           <div class="text-center text-success my-2">
@@ -31,7 +53,7 @@
         </template>
         <template #cell(actions)="row">
           <b-button
-            :to="{ name: 'DepartmentEdit', params: { id: row.item.id } }"
+            v-b-modal.modal-1
             size="sm"
             pill
             class="bg-teal"
@@ -51,7 +73,32 @@
           ></b-button>
         </template>
       </b-table>
+      <b-row>
+        <b-col md="6">
+          <small class="form-text text-muted">
+            Từ {{ (currentPage - 1) * perPage + 1 }} đến
+            {{
+              perPage * currentPage > totalRows
+                ? totalRows
+                : perPage * currentPage
+            }}
+            trong {{ totalRows }} kết quả</small
+          >
+        </b-col>
+        <b-col md="6">
+          <b-pagination
+            align="right"
+            v-model="currentPage"
+            :total-rows="totalRows"
+            :per-page="perPage"
+          >
+          </b-pagination>
+        </b-col>
+      </b-row>
     </b-card>
+    <b-modal id="modal-1" title="BootstrapVue">
+      <p class="my-4">Hello from modal!</p>
+    </b-modal>
   </div>
 </template>
 
@@ -77,6 +124,15 @@ export default {
   methods: {},
   computed: {
     ...mapGetters(["getDepartment", "getFieldsDepartment"]),
+  },
+  mounted() {
+    this.filterOn = this.getFieldsDepartment.map((x) => x["key"]);
+    this.totalRows = this.getDepartment.length;
+  },
+  watch: {
+    getDepartment: function (val) {
+      this.totalRows = val.length;
+    },
   },
 };
 </script>
