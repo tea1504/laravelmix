@@ -64,6 +64,10 @@ export default {
       this.$emit("loading");
       Department.update(this.department, this.id)
         .then((res) => {
+          this.$swal("Lưu thành công").then(() => {
+            this.department = res.data;
+            this.departmentIndex();
+          });
           this.$emit("loaded");
         })
         .catch((err) => {

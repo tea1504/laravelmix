@@ -70,6 +70,7 @@
             style="border: none"
             v-b-tooltip.hover
             title="Xóa"
+            @click="xoa(row.item.id)"
             ><i class="fas fa-trash"></i
           ></b-button>
         </template>
@@ -104,7 +105,7 @@
       title="Chỉnh sửa bộ phận"
       hide-footer
     >
-      <department-edit :id="id" />
+      <department-edit :id="id"/>
     </b-modal>
     <b-modal
       id="modal-create"
@@ -143,6 +144,9 @@ export default {
     };
   },
   methods: {
+    xoa(id){
+      console.log(id);
+    }
   },
   computed: {
     ...mapGetters(["getDepartment", "getFieldsDepartment"]),
