@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Department from "../../apis/Department";
 export default {
   data() {
@@ -40,17 +41,41 @@ export default {
     };
   },
   methods: {
-    create() {
-      this.$emit('loading');
-      Department.create(this.department)
+    ...mapActions(["setDepartment"]),
+    departmentIndex() {
+      this.isLoaded = false;
+      Department.index()
         .then((res) => {
-          this.$swal('Lưu thành công').then(()=>{
-            this.department.name = null;
-          });
-          this.$emit('loaded');
+          this.setDepartment(res.data);
+          this.isLoaded = true;
         })
         .catch((err) => {
-          this.$emit('loaded');
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          }
+          this.isLoaded = true;
+        });
+    },
+    create() {
+      this.$emit("loading");
+      Department.create(this.department)
+        .then((res) => {
+          this.$swal("Lưu thành công").then(() => {
+            this.department.name = null;
+            this.errors = [];
+            this.departmentIndex();
+          });
+          this.$emit("loaded");
+        })
+        .catch((err) => {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          } else if (err.response.status == 422) {
+            this.errors = err.response.data.errors;
+          }
+          this.$emit("loaded");
         });
     },
   },

@@ -37,7 +37,10 @@ class DepartmentController extends Controller
      */
     public function store(DepartmentRequest $request)
     {
-        return response()->json($request->all());
+        $department = new Department();
+        $department->name = $request->name;
+        $department->save();
+        return response()->json($department);
     }
 
     /**
