@@ -1,10 +1,13 @@
 import Api from './Api'
 
 export default {
-  index(){
+  index() {
     return Api().get('/table');
   },
-  create(form){
+  create(form) {
     return Api().post('/table', form);
+  },
+  update(id, form) {
+    return Api().put('/table/' + id, form);
   }
 }

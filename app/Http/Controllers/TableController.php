@@ -36,7 +36,10 @@ class TableController extends Controller
      */
     public function store(TableRequest $request)
     {
-        return $request->all();
+        $table = new Table();
+        $table->name = $request->name;
+        $table->save();
+        return response()->json($table);
     }
 
     /**
