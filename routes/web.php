@@ -4,6 +4,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::prefix('api')->group(function () {
         Route::resource('staff', StaffController::class);
         Route::get('department/get', [DepartmentController::class, 'get']);
         Route::resource('department', DepartmentController::class);
+        Route::resource('table', TableController::class);
     });
 });
 
