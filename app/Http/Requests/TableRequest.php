@@ -31,7 +31,7 @@ class TableRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Bạn phải nhập tên',
+            'name.required' => 'Bạn phải nhập tên bàn',
         ];
     }
 }
