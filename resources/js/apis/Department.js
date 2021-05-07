@@ -1,16 +1,16 @@
 import Api from './Api'
 
 export default {
-  get(){
+  get() {
     return Api().get('/department/get');
   },
-  index(){
+  index() {
     return Api().get('/department');
   },
-  create(form){
+  create(form) {
     return Api().post('/department', form);
   },
-  show(id){
-    return Api().get('/department/'+id);
+  show(id) {
+    return Api().get('/department/' + id);
   }
 }
