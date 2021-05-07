@@ -7,7 +7,7 @@ export default {
   index(){
     return Api().get('/department');
   },
-  create(){
-    return Api().post('/department');
+  create(form){
+    return Api().post('/department', form);
   }
 }

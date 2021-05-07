@@ -31,9 +31,6 @@
 <script>
 import Department from "../../apis/Department";
 export default {
-  props: {
-    isLoaded: Boolean,
-  },
   data() {
     return {
       department: {
@@ -44,13 +41,16 @@ export default {
   },
   methods: {
     create() {
-      this.isLoaded = false;
-      Department.create()
+      this.$emit('loading');
+      Department.create(this.department)
         .then((res) => {
-          this.isLoaded = true;
+          this.$swal('Lưu thành công').then(()=>{
+            this.department.name = null;
+          });
+          this.$emit('loaded');
         })
         .catch((err) => {
-          this.isLoaded = true;
+          this.$emit('loaded');
         });
     },
   },

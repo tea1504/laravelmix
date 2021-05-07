@@ -114,7 +114,7 @@
       header-bg-variant="teal"
       hide-footer
     >
-      <department-create :isLoaded="isLoaded" />
+      <department-create v-on:loading="$emit('loading')" v-on:loaded="$emit('loaded')"/>
     </b-modal>
   </div>
 </template>
