@@ -22,7 +22,7 @@
     </b-form-group>
     <b-row>
       <b-col offset="2">
-        <b-button class="bg-teal border-0" @click="create">Lưu</b-button>
+        <b-button class="bg-teal border-0" @click="update">Lưu</b-button>
       </b-col>
     </b-row>
   </div>
@@ -47,13 +47,17 @@ export default {
     ...mapActions(["setDepartment"]),
     show() {
       this.$emit("loading");
-      Department.show(id)
+      Department.show(this.id)
         .then((res) => {
+          this.department = res.data;
           this.$emit("loaded");
         })
         .catch((err) => {
           this.$emit("loaded");
         });
+    },
+    update(){
+
     },
     departmentIndex() {
       this.$emit("loading");
