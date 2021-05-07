@@ -2,7 +2,11 @@ const state = {
   department: []
 }
 
-const getters = {}
+const getters = {
+  getDepartment: state => {
+    return state.department;
+  }
+}
 
 const mutations = {}
 
