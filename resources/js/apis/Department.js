@@ -15,5 +15,8 @@ export default {
   },
   update(form, id) {
     return Api().put('/department/' + id, form);
+  },
+  delete(id) {
+    return Api().delete('/department/' + id);
   }
 }
