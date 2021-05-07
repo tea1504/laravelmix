@@ -29,6 +29,27 @@
         <template #cell(updated_at)="row">
           {{ row.value | date }}
         </template>
+        <template #cell(actions)="row">
+          <b-button
+            :to="{ name: 'DepartmentEdit', params: { id: row.item.id } }"
+            size="sm"
+            pill
+            class="bg-teal"
+            style="border: none"
+            v-b-tooltip.hover
+            title="Sửa"
+            ><i class="fas fa-pen"></i
+          ></b-button>
+          <b-button
+            size="sm"
+            pill
+            variant="danger"
+            style="border: none"
+            v-b-tooltip.hover
+            title="Xóa"
+            ><i class="fas fa-trash"></i
+          ></b-button>
+        </template>
       </b-table>
     </b-card>
   </div>
