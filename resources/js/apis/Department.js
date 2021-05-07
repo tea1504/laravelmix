@@ -14,6 +14,6 @@ export default {
     return Api().get('/department/' + id);
   },
   update(form, id) {
-    return Api().post('/department/' + id + '?_method=put', form);
+    return Api().put('/department/' + id, form);
   }
 }

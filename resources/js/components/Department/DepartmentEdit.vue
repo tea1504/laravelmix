@@ -53,6 +53,10 @@ export default {
           this.$emit("loaded");
         })
         .catch((err) => {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          }
           this.$emit("loaded");
         });
     },
@@ -63,6 +67,12 @@ export default {
           this.$emit("loaded");
         })
         .catch((err) => {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          } else if (err.response.status == 422) {
+            this.errors = err.response.data.errors;
+          }
           this.$emit("loaded");
         });
     },
