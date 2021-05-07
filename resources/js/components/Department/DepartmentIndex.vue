@@ -97,8 +97,8 @@
         </b-col>
       </b-row>
     </b-card>
-    <b-modal id="modal-edit" title="BootstrapVue">
-      <p class="my-4">Hello from modal! {{ id }}</p>
+    <b-modal id="modal-edit" title="BootstrapVue" @ok="update">
+      <department-edit/>
     </b-modal>
     <b-modal id="modal-create" title="BootstrapVue">
       <p class="my-4">Hello from modal!</p>
@@ -108,7 +108,9 @@
 
 <script>
 import { mapGetters } from "vuex";
+import DepartmentEdit from './DepartmentEdit.vue';
 export default {
+  components: { DepartmentEdit },
   props: {
     isLoaded: Boolean,
   },
@@ -126,7 +128,11 @@ export default {
       id: 0,
     };
   },
-  methods: {},
+  methods: {
+    update(){
+      console.log('update');
+    }
+  },
   computed: {
     ...mapGetters(["getDepartment", "getFieldsDepartment"]),
   },
