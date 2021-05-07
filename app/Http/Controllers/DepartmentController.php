@@ -49,9 +49,10 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show(Department $department)
+    public function show($id)
     {
-        //
+        $department = Department::find($id);
+        return response()->json($department);
     }
 
     /**
