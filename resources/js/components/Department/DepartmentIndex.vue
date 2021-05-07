@@ -15,7 +15,7 @@
         sticky-header="500px"
         :items="getDepartment"
         :fields="getFieldsDepartment"
-        :busy="isLoaded"
+        :busy="!isLoaded"
       >
         <template #table-busy>
           <div class="text-center text-success my-2">
