@@ -74,7 +74,12 @@ export default {
         .catch((err) => {
           if (err.response.status == 401) {
             localStorage.removeItem("token");
-            this.$router.push({ name: "Login" });
+            this.$router.push({
+              name: "Login",
+              query: {
+                redirect: to.fullPath,
+              },
+            });
           } else if (err.response.status == 422) {
             this.errors = err.response.data.errors;
           }

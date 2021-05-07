@@ -7,7 +7,13 @@ export default {
   create(form) {
     return Api().post('/table', form);
   },
-  update(id, form) {
+  update(form, id) {
     return Api().put('/table/' + id, form);
+  },
+  show(id) {
+    return Api().get('/table/' + id);
+  },
+  delete(id) {
+    return Api().delete('/table/' + id);
   }
 }

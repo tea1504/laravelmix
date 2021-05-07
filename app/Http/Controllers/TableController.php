@@ -50,7 +50,7 @@ class TableController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(Table::find($id));
     }
 
     /**
@@ -71,9 +71,12 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TableRequest $request, $id)
     {
-        //
+        $table = Table::find($id);
+        $table->name = $request->name;
+        $table->save();
+        return response()->json($table);
     }
 
     /**
@@ -84,6 +87,8 @@ class TableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $table = Table::find($id);
+        $table->delete();
+        return response()->json('ok');
     }
 }

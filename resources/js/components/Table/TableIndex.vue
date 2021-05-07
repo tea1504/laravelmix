@@ -153,11 +153,11 @@ export default {
   methods: {
     ...mapActions(["setTable"]),
     tableIndex() {
-      this.isLoaded = false;
+      this.$emit("loading");
       Table.index()
         .then((res) => {
           this.setTable(res.data);
-          this.isLoaded = true;
+          this.$emit("loaded");
         })
         .catch((err) => {
           if (err.response.status == 401) {
@@ -169,7 +169,7 @@ export default {
               },
             });
           }
-          this.isLoaded = true;
+          this.$emit("loaded");
         });
     },
     xoa(id) {
