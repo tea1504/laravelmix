@@ -97,20 +97,33 @@
         </b-col>
       </b-row>
     </b-card>
-    <b-modal id="modal-edit" title="BootstrapVue" @ok="update">
-      <department-edit/>
+    <b-modal
+      id="modal-edit"
+      size="xl"
+      scrollable
+      title="Chỉnh sửa bộ phận"
+      @ok="update"
+    >
+      <department-edit :id="id" />
     </b-modal>
-    <b-modal id="modal-create" title="BootstrapVue">
-      <p class="my-4">Hello from modal!</p>
+    <b-modal
+      id="modal-create"
+      size="xl"
+      scrollable
+      title="Thêm mới bộ phận"
+      @ok="create"
+    >
+      <department-create/>
     </b-modal>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import DepartmentEdit from './DepartmentEdit.vue';
+import DepartmentEdit from "./DepartmentEdit.vue";
+import DepartmentCreate from "./DepartmentCreate";
 export default {
-  components: { DepartmentEdit },
+  components: { DepartmentEdit, DepartmentCreate },
   props: {
     isLoaded: Boolean,
   },
@@ -129,9 +142,12 @@ export default {
     };
   },
   methods: {
-    update(){
-      console.log('update');
-    }
+    update() {
+      console.log("update");
+    },
+    create() {
+      console.log("create");
+    },
   },
   computed: {
     ...mapGetters(["getDepartment", "getFieldsDepartment"]),
