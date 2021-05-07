@@ -1,6 +1,31 @@
 const state = {
   table: [],
-  fieldsTable: [],
+  fieldsTable: [
+    {
+      key: 'id',
+      label: 'ID',
+      sortable: true,
+    },
+    {
+      key: 'name',
+      label: 'Bàn',
+      sortable: true,
+    },
+    {
+      key: 'created_at',
+      label: 'Ngày tạo',
+      sortable: true,
+    },
+    {
+      key: 'updated_at',
+      label: 'Ngày cập nhật',
+      sortable: true,
+    },
+    {
+      key: 'actions',
+      label: 'Actions',
+    },
+  ],
 }
 
 const getters = {

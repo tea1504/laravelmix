@@ -32,8 +32,8 @@
         hover
         outlined
         sticky-header="500px"
-        :items="getDepartment"
-        :fields="getFieldsDepartment"
+        :items="getTable"
+        :fields="getFieldsTable"
         :busy="!isLoaded"
         :per-page="perPage"
         :current-page="currentPage"
@@ -125,6 +125,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import Spinner from "../../views/Spinner.vue";
 import TableCreate from "./TableCreate.vue";
 import TableEdit from "./TableEdit.vue";
@@ -148,7 +149,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setDepartment"]),
+    ...mapActions(["setTable"]),
     departmentIndex() {
       this.$emit("loading");
       Department.index()
@@ -159,7 +160,12 @@ export default {
         .catch((err) => {
           if (err.response.status == 401) {
             localStorage.removeItem("token");
-            this.$router.push({ name: "Login" });
+            this.$router.push({
+              name: "Login",
+              query: {
+                redirect: to.fullPath,
+              },
+            });
           }
           this.$emit("loaded");
         });
@@ -193,14 +199,14 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getDepartment", "getFieldsDepartment"]),
+    ...mapGetters(["getTable", "getFieldsTable"]),
   },
   mounted() {
-    this.filterOn = this.getFieldsDepartment.map((x) => x["key"]);
-    this.totalRows = this.getDepartment.length;
+    this.filterOn = this.getFieldsTable.map((x) => x["key"]);
+    this.totalRows = this.getTable.length;
   },
   watch: {
-    getDepartment: function (val) {
+    getTable: function (val) {
       this.totalRows = val.length;
     },
   },
