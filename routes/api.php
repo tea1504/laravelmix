@@ -23,4 +23,4 @@ Route::middleware('auth:sanctum')->group(function () {
     
 });
 
-Route::get('/img/{thumuc}/{tenhinh}', [ImageController::class, 'get']);
+// Route::get('/img/{thumuc}/{tenhinh}', [ImageController::class, 'get']);

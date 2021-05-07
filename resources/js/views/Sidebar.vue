@@ -2,7 +2,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a @click="$router.push({ name: 'Home' })" class="brand-link" style="cursor: pointer;">
       <img
-        src="icon.png"
+        src="http://demo.laravelmix.local:81/api/image/chung/icon.png"
         alt="logo"
         class="brand-image img-circle elevation-3"
         style="opacity: 0.8"

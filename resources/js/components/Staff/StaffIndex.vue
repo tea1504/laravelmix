@@ -66,7 +66,7 @@
             ><i class="fas fa-pen"></i
           ></b-button>
           <b-button
-            :to="{ name: 'StaffEdit', params: { id: row.item.id } }"
+            @click="xoa(row.item.id)"
             size="sm"
             pill
             variant="danger"
@@ -85,7 +85,15 @@
       </b-table>
       <b-row>
         <b-col md="6">
-          <small class="form-text text-muted"> Từ {{(currentPage - 1) * perPage + 1}} đến {{(perPage*currentPage>totalRows)?totalRows:perPage*currentPage}} trong {{totalRows}} kết quả</small>
+          <small class="form-text text-muted">
+            Từ {{ (currentPage - 1) * perPage + 1 }} đến
+            {{
+              perPage * currentPage > totalRows
+                ? totalRows
+                : perPage * currentPage
+            }}
+            trong {{ totalRows }} kết quả</small
+          >
         </b-col>
         <b-col md="6">
           <b-pagination
@@ -102,7 +110,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import Staff from "../../apis/Staff";
 export default {
   props: {
     isLoaded: Boolean,
@@ -120,15 +129,61 @@ export default {
       filterOn: [],
     };
   },
-  methods: {},
+  methods: {
+    ...mapActions(['setStaff']),
+    staffIndex() {
+      this.isLoaded = false;
+      Staff.index()
+        .then((res) => {
+          this.setStaff(res.data);
+          this.isLoaded = true;
+        })
+        .catch((err) => {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          }
+          this.isLoaded = true;
+        });
+    },
+    xoa(id) {
+      this.$swal({
+        title: "Bạn chắc chắn muốn xóa?",
+        showCancelButton: true,
+        confirmButtonText: `Xóa`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.isLoaded = false;
+          Staff.delete(id)
+            .then((res) => {
+              this.$swal('Đã xóa thành công').then(()=>{
+                this.staffIndex();
+              });
+              this.isLoaded = true;
+            })
+            .catch((err) => {
+              if (err.response.status == 401) {
+                localStorage.removeItem("token");
+                this.$router.push({ name: "Login" });
+              }
+              this.isLoaded = true;
+            });
+        } else {
+          this.$swal("Đã hủy xóa");
+        }
+      });
+    },
+  },
   computed: {
     ...mapGetters(["getStaff", "getFields"]),
   },
   mounted() {
     this.filterOn = this.getFields.map((x) => x["key"]);
+    this.totalRows = this.getStaff.length;
   },
   watch: {
     getStaff: function (val) {
+      console.log('getStaff change');
       this.totalRows = val.length;
     },
   },

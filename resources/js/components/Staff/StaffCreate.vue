@@ -1,5 +1,6 @@
 <template>
   <div>
+    <spinner v-if="!isLoaded" />
     <b-card
       header="Thêm mới nhân viên"
       header-class="h1 font-weight-bold bg-gradient-teal"
@@ -14,14 +15,14 @@
       >
         <b-form-input
           type="text"
-          id="first_name"
+          id="last_name"
           placeholder="Ví dụ: Trần Văn"
-          v-model="staff.first_name"
-          :state="true"
-          aria-describedby="first_name_err"
+          v-model="staff.last_name"
+          :state="errors.last_name | check"
+          aria-describedby="last_name_err"
         ></b-form-input>
-        <b-form-invalid-feedback id="first_name_err">
-          alo
+        <b-form-invalid-feedback id="last_name_err" v-if="errors.last_name">
+          {{ errors.last_name[0] }}
         </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
@@ -34,14 +35,14 @@
       >
         <b-form-input
           type="text"
-          id="last_name"
+          id="first_name"
           placeholder="Ví dụ: Hòa"
-          v-model="staff.last_name"
-          :state="false"
-          aria-describedby="last_name_err"
+          v-model="staff.first_name"
+          :state="errors.first_name | check"
+          aria-describedby="first_name_err"
         ></b-form-input>
-        <b-form-invalid-feedback id="last_name_err">
-          Enter at least 3 letters
+        <b-form-invalid-feedback id="first_name_err" v-if="errors.first_name">
+          {{ errors.first_name[0] }}
         </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
@@ -55,15 +56,14 @@
         <b-form-select
           id="department_id"
           v-model="staff.department_id"
-          :state="false"
-          :options="[
-            { value: 'a', text: 'a' },
-            { value: 'b', text: 'b' },
-          ]"
+          :state="errors.department_id | check"
+          :options="department"
           aria-describedby="department_id_err"
         ></b-form-select>
-        <b-form-invalid-feedback id="department_id_err"
-          >alo</b-form-invalid-feedback
+        <b-form-invalid-feedback
+          id="department_id_err"
+          v-if="errors.department_id"
+          >{{ errors.department_id[0] }}</b-form-invalid-feedback
         >
       </b-form-group>
       <b-form-group
@@ -85,11 +85,14 @@
           menu-class="w-100"
           calendar-width="100%"
           v-bind="label"
-          :state="null"
+          :state="errors.date_of_birth | check"
           aria-describedby="date_of_birth_err"
         ></b-form-datepicker>
-        <b-form-invalid-feedback id="date_of_birth_err">
-          Enter at least 3 letters
+        <b-form-invalid-feedback
+          id="date_of_birth_err"
+          v-if="errors.date_of_birth"
+        >
+          {{ errors.date_of_birth[0] }}
         </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
@@ -105,11 +108,14 @@
           id="identity_card_number"
           placeholder="Nhập dãy 12 chữ số"
           v-model="staff.identity_card_number"
-          :state="false"
+          :state="errors.identity_card_number | check"
           aria-describedby="identity_card_number_err"
         ></b-form-input>
-        <b-form-invalid-feedback id="identity_card_number_err">
-          Enter at least 3 letters
+        <b-form-invalid-feedback
+          id="identity_card_number_err"
+          v-if="errors.identity_card_number"
+        >
+          {{ errors.identity_card_number[0] }}
         </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
@@ -125,11 +131,14 @@
           id="phone_number"
           placeholder="Nhập dãy 10 chữ số"
           v-model="staff.phone_number"
-          :state="false"
+          :state="errors.phone_number | check"
           aria-describedby="phone_number_err"
         ></b-form-input>
-        <b-form-invalid-feedback id="phone_number_err">
-          Enter at least 3 letters
+        <b-form-invalid-feedback
+          id="phone_number_err"
+          v-if="errors.phone_number"
+        >
+          {{ errors.phone_number[0] }}
         </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
@@ -145,11 +154,11 @@
           id="address"
           placeholder="Ví dụ: Số nhà 89, phố Tô Vĩnh Diễn, phường Khương Trung, quận Thanh Xuân, thành phố Hà Nội."
           v-model="staff.address"
-          :state="false"
+          :state="errors.address | check"
           aria-describedby="address_err"
         ></b-form-input>
-        <b-form-invalid-feedback id="address_err">
-          Enter at least 3 letters
+        <b-form-invalid-feedback id="address_err" v-if="errors.address">
+          {{ errors.address[0] }}
         </b-form-invalid-feedback>
       </b-form-group>
       <b-form-group
@@ -162,19 +171,34 @@
       >
         <b-form-file
           v-model="staff.image"
-          :state="Boolean(staff.image)"
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
           @change="change"
         ></b-form-file>
-        <img id="output" src="default.png" class="mt-2" height="150px" />
+        <img
+          id="output"
+          src="http://demo.laravelmix.local:81/api/image/chung/default.png"
+          class="mt-2"
+          height="150px"
+        />
       </b-form-group>
+      <b-row
+        ><b-col offset-sm="2" offset-md="1">
+          <b-button @click="submit" class="bg-teal border-0">Lưu</b-button>
+          <b-button :to="{ name: 'StaffIndex' }">Trở về</b-button>
+        </b-col></b-row
+      >
     </b-card>
   </div>
 </template>
 
 <script>
+import Staff from "../../apis/Staff";
+import Department from "../../apis/Department";
+import Spinner from "../../views/Spinner.vue";
+import { mapActions } from "vuex";
 export default {
+  components: { Spinner },
   data() {
     return {
       staff: {
@@ -205,9 +229,13 @@ export default {
         labelNav: "Điều hướng lịch",
         labelHelp: "Sử dụng các phím con trỏ để duyệt ngày tháng",
       },
+      department: [],
+      isLoaded: true,
+      errors: [],
     };
   },
   methods: {
+    ...mapActions(["setStaff"]),
     change(e) {
       this.staff.image = e.target.files[0];
       this.loadFile(e);
@@ -216,6 +244,101 @@ export default {
       var output = document.getElementById("output");
       output.src = URL.createObjectURL(e.target.files[0]);
     },
+    default() {
+      return {
+        department_id: "",
+        first_name: "",
+        last_name: "",
+        date_of_birth: "",
+        identity_card_number: "",
+        phone_number: "",
+        address: "",
+        username: "",
+        password: "",
+        image: "",
+      };
+    },
+    getDepartment() {
+      this.isLoaded = false;
+      Department.get()
+        .then((res) => {
+          Array.from(res.data).forEach((arr) => {
+            var temp = { name: null, text: null };
+            temp.value = arr.id;
+            temp.text = arr.name;
+            this.department.push(temp);
+          });
+          this.isLoaded = true;
+        })
+        .catch((err) => {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          }
+          this.isLoaded = true;
+        });
+    },
+    staffIndex() {
+      this.isLoaded = false;
+      Staff.index()
+        .then((res) => {
+          this.setStaff(res.data);
+          this.isLoaded = true;
+        })
+        .catch((err) => {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          }
+          this.isLoaded = true;
+        });
+    },
+    submit() {
+      this.isLoaded = false;
+      var formData = new FormData();
+      formData.append("department_id", this.staff.department_id);
+      formData.append("first_name", this.staff.first_name);
+      formData.append("last_name", this.staff.last_name);
+      formData.append("date_of_birth", this.staff.date_of_birth);
+      formData.append("identity_card_number", this.staff.identity_card_number);
+      formData.append("phone_number", this.staff.phone_number);
+      formData.append("address", this.staff.address);
+      formData.append("image", this.staff.image);
+      Staff.create(formData)
+        .then((res) => {
+          this.staffIndex();
+          this.$swal({
+            icon: "success",
+            title: "Lưu thành công",
+            text:
+              "Tài khoản là: " +
+              res.data.username +
+              ". Mật khẩu mặc định là: " +
+              res.data.password,
+          }).then(() => {
+            this.staff = this.default();
+            this.$router.push({ name: "StaffIndex" });
+          });
+          this.isLoaded = true;
+        })
+        .catch((err) => {
+          if ((err.response.status = 422))
+            this.errors = err.response.data.errors;
+          else if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({ name: "Login" });
+          }
+          this.isLoaded = true;
+        });
+    },
+  },
+  filters: {
+    check: function (value) {
+      return value == null ? null : false;
+    },
+  },
+  mounted() {
+    this.getDepartment();
   },
 };
 </script>
