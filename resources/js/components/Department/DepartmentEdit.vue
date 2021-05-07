@@ -56,8 +56,15 @@ export default {
           this.$emit("loaded");
         });
     },
-    update(){
-
+    update() {
+      this.$emit("loading");
+      Department.update(this.department, this.id)
+        .then((res) => {
+          this.$emit("loaded");
+        })
+        .catch((err) => {
+          this.$emit("loaded");
+        });
     },
     departmentIndex() {
       this.$emit("loading");
@@ -80,9 +87,9 @@ export default {
       return value == null ? null : false;
     },
   },
-  mounted(){
+  mounted() {
     this.show();
-  }
+  },
 };
 </script>
 
