@@ -111,9 +111,14 @@
       size="xl"
       scrollable
       title="Thêm mới bộ phận"
+      header-bg-variant="teal"
+      hide-footer
       @ok="create"
     >
       <department-create/>
+      <b-button>
+        Lưu
+      </b-button>
     </b-modal>
   </div>
 </template>
