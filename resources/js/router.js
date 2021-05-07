@@ -16,6 +16,8 @@ import Department from './components/Department/Department.vue'
 import DepartmentIndex from './components/Department/DepartmentIndex.vue'
 import Table from './components/Table/Table.vue'
 import TableIndex from './components/Table/TableIndex.vue'
+import Type from './components/Type/Type.vue'
+import TypeIndex from './components/Type/TypeIndex.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -103,6 +105,22 @@ export const router = new VueRouter({
             path: '',
             name: 'TableIndex',
             component: TableIndex,
+          }
+        ],
+      },
+      {
+        path: 'type',
+        name: 'Type',
+        component: Type,
+        meta: {
+          authOnly: true,
+          //QuanLyOnly: true
+        },
+        children: [
+          {
+            path: '',
+            name: 'TypeIndex',
+            component: TypeIndex,
           }
         ],
       },
