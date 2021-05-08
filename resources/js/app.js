@@ -29,6 +29,8 @@ Vue.use(IconsPlugin)
 
 import App from './views/App'
 
+import User from './apis/User'
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.authOnly)) {
     if (!localStorage.getItem('token')) {

@@ -44,7 +44,7 @@ export const router = new VueRouter({
         name: 'Staff',
         component: Staff,
         meta: {
-          QuanLyOnly: true,
+          // QuanLyOnly: true,
         },
         children: [
           {
@@ -69,7 +69,7 @@ export const router = new VueRouter({
         name: 'Department',
         component: Department,
         meta: {
-          QuanLyOnly: true
+          // QuanLyOnly: true
         },
         children: [
           {
@@ -84,7 +84,7 @@ export const router = new VueRouter({
         name: 'Table',
         component: Table,
         meta: {
-          QuanLyOnly: true
+          // QuanLyOnly: true
         },
         children: [
           {
@@ -99,7 +99,7 @@ export const router = new VueRouter({
         name: 'Type',
         component: Type,
         meta: {
-          QuanLyOnly: true
+          // QuanLyOnly: true
         },
         children: [
           {
@@ -113,7 +113,7 @@ export const router = new VueRouter({
         name: 'Dish',
         component: Dish,
         meta: {
-          QuanLyOnly: true,
+          // QuanLyOnly: true,
         },
         children: [
           {
