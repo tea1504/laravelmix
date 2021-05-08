@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DishController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StaffController;
@@ -31,6 +32,7 @@ Route::prefix('api')->group(function () {
         Route::resource('department', DepartmentController::class);
         Route::resource('table', TableController::class);
         Route::resource('type', TypeController::class);
+        Route::resource('dish', DishController::class);
     });
 });
 

@@ -18,6 +18,10 @@ import Table from './components/Table/Table.vue'
 import TableIndex from './components/Table/TableIndex.vue'
 import Type from './components/Type/Type.vue'
 import TypeIndex from './components/Type/TypeIndex.vue'
+import Dish from './components/Dish/Dish.vue'
+import DishIndex from './components/Dish/DishIndex.vue'
+import DishCreate from './components/Dish/DishCreate.vue'
+import DishEdit from './components/Dish/DishEdit.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -123,6 +127,43 @@ export const router = new VueRouter({
             component: TypeIndex,
           }
         ],
+      }, {
+        path: 'dish',
+        name: 'Dish',
+        component: Dish,
+        meta: {
+          authOnly: true,
+          // QuanLyOnly: true,
+        },
+        children: [
+          {
+            path: '',
+            name: 'DishIndex',
+            component: DishIndex,
+            meta: {
+              authOnly: true,
+              // QuanLyOnly: true,
+            },
+          },
+          {
+            path: 'create',
+            name: 'DishCreate',
+            component: DishCreate,
+            meta: {
+              authOnly: true,
+              // QuanLyOnly: true,
+            },
+          },
+          {
+            path: '/:id/edit',
+            name: 'DishEdit',
+            component: DishEdit,
+            meta: {
+              authOnly: true,
+              // QuanLyOnly: true,
+            },
+          },
+        ]
       },
     ]
   },
