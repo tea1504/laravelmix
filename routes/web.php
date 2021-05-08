@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DishController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\StaffController;
-use App\Http\Controllers\TableController;
-use App\Http\Controllers\TypeController;
+// use App\Http\Controllers\DepartmentController;
+// use App\Http\Controllers\DishController;
+// use App\Http\Controllers\ImageController;
+// use App\Http\Controllers\LoginController;
+// use App\Http\Controllers\StaffController;
+// use App\Http\Controllers\TableController;
+// use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
