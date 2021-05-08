@@ -2,7 +2,7 @@
   <div>
     <spinner v-if="!isLoaded" />
     <b-card
-      header="Danh sách bàn"
+      header="Danh sách món ăn"
       header-class="h1 font-weight-bold bg-gradient-teal"
     >
       <b-button v-b-modal.modal-create class="bg-teal border-0 mb-1">
@@ -129,8 +129,8 @@
 import { mapActions, mapGetters } from "vuex";
 import Type from "../../apis/Type";
 import Spinner from "../../views/Spinner.vue";
-import TypeCreate from './TypeCreate.vue';
-import TypeEdit from './TypeEdit.vue';
+import TypeCreate from "./TypeCreate.vue";
+import TypeEdit from "./TypeEdit.vue";
 export default {
   components: { Spinner, TypeCreate, TypeEdit },
   props: {
@@ -197,12 +197,12 @@ export default {
                   },
                 });
               } else {
-            this.$swal({
-              icon: "error",
-              title: "Lỗi",
-              text: "Không thể xóa dữ liệu. Hãy thử lại sau.",
-            });
-          }
+                this.$swal({
+                  icon: "error",
+                  title: "Lỗi",
+                  text: "Không thể xóa dữ liệu. Hãy thử lại sau.",
+                });
+              }
               this.$emit("loaded");
             });
         } else {
@@ -227,5 +227,4 @@ export default {
 </script>
 
 <style>
-
 </style>
