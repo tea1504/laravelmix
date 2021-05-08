@@ -21,20 +21,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::prefix('api')->group(function () {
-    Route::get('image/{thuMuc}/{hinhAnh}', [ImageController::class, 'get']);
-    Route::post('login', [LoginController::class, 'login']);
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('logout', [LoginController::class, 'logout']);
-        Route::post('user', [LoginController::class, 'user']);
-        Route::resource('staff', StaffController::class);
-        Route::get('department/get', [DepartmentController::class, 'get']);
-        Route::resource('department', DepartmentController::class);
-        Route::resource('table', TableController::class);
-        Route::resource('type', TypeController::class);
-        Route::resource('dish', DishController::class);
-    });
-});
+// Route::prefix('api')->group(function () {
+//     Route::get('image/{thuMuc}/{hinhAnh}', [ImageController::class, 'get']);
+//     Route::post('login', [LoginController::class, 'login']);
+//     Route::middleware('auth:sanctum')->group(function () {
+//         Route::post('logout', [LoginController::class, 'logout']);
+//         Route::post('user', [LoginController::class, 'user']);
+//         Route::resource('staff', StaffController::class);
+//         Route::get('department/get', [DepartmentController::class, 'get']);
+//         Route::resource('department', DepartmentController::class);
+//         Route::resource('table', TableController::class);
+//         Route::resource('type', TypeController::class);
+//         Route::resource('dish', DishController::class);
+//     });
+// });
 
 Route::get('/{any}', function () {
     return view('welcome');
