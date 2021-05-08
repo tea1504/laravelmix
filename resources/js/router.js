@@ -22,6 +22,10 @@ import Dish from './components/Dish/Dish.vue'
 import DishIndex from './components/Dish/DishIndex.vue'
 import DishCreate from './components/Dish/DishCreate.vue'
 import DishEdit from './components/Dish/DishEdit.vue'
+import Invoice from './components/Invoice/Invoice.vue'
+import InvoiceIndex from './components/Invoice/InvoiceIndex.vue'
+import InvoiceCreate from './components/Invoice/InvoiceCreate.vue'
+import InvoiceEdit from './components/Invoice/InvoiceEdit.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -108,7 +112,8 @@ export const router = new VueRouter({
             component: TypeIndex,
           }
         ],
-      }, {
+      }, 
+      {
         path: 'dish',
         name: 'Dish',
         component: Dish,
@@ -130,6 +135,31 @@ export const router = new VueRouter({
             path: ':id/edit',
             name: 'DishEdit',
             component: DishEdit,
+          },
+        ]
+      },
+      {
+        path: 'invoice',
+        name: 'Invoice',
+        component: Invoice,
+        meta: {
+          // QuanLyOnly: true,
+        },
+        children: [
+          {
+            path: '',
+            name: 'InvoiceIndex',
+            component: InvoiceIndex,
+          },
+          {
+            path: 'create',
+            name: 'InvoiceCreate',
+            component: InvoiceCreate,
+          },
+          {
+            path: ':id/edit',
+            name: 'InvoiceEdit',
+            component: InvoiceEdit,
           },
         ]
       },
