@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TypeRequest;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -13,7 +15,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Type::all());
     }
 
     /**
@@ -32,9 +34,12 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TypeRequest $request)
     {
-        //
+        $type = new Type();
+        $type->name = $request->name;
+        $type->save();
+        return $type;
     }
 
     /**
@@ -45,7 +50,7 @@ class TypeController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(Type::find($id));
     }
 
     /**
@@ -66,9 +71,12 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TypeRequest $request, $id)
     {
-        //
+        $type = Type::find($id);
+        $type->name = $request->name;
+        $type->save();
+        return response()->json($type);
     }
 
     /**
@@ -79,6 +87,8 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $type = Type::find($id);
+        $type->delete();
+        return response()->json('ok');
     }
 }

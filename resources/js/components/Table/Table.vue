@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content pt-1">
     <router-view :isLoaded="isLoaded" />
   </div>
 </template>
