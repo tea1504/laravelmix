@@ -7,6 +7,7 @@ import Department from './modules/Department'
 import Table from './modules/Table'
 import Type from './modules/Type'
 import Dish from './modules/Dish'
+import Invoice from './modules/Invoice'
 
 Vue.use(VueX);
 
@@ -18,5 +19,6 @@ export const store = new VueX.Store({
         Table,
         Type,
         Dish,
+        Invoice,
     }
 });
