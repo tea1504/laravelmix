@@ -6,6 +6,7 @@ import Staff from './modules/Staff'
 import Department from './modules/Department'
 import Table from './modules/Table'
 import Type from './modules/Type'
+import Dish from './modules/Dish'
 
 Vue.use(VueX);
 
@@ -16,5 +17,6 @@ export const store = new VueX.Store({
         Department,
         Table,
         Type,
+        Dish,
     }
 });
