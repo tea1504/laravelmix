@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DishRequest;
+use App\Models\Dish;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
 {
@@ -13,7 +16,8 @@ class DishController extends Controller
      */
     public function index()
     {
-        //
+        $dish = Dish::with('type')->get();
+        return response()->json($dish);
     }
 
     /**
@@ -32,9 +36,22 @@ class DishController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DishRequest $request)
     {
-        //
+        $dish = new Dish();
+        $dish->type_id = $request->type_id;
+        $dish->name = $request->name;
+        $dish->price = $request->price;
+        $dish->description = $request->description;
+        if ($request->hasFile('image')) {
+            $file = $request->image;
+            $dish->image = 'http://demo.laravelmix.local:81/api/image/dish/' . $file->getClientOriginalName();
+            $file->storeAs('public/dish', $file->getClientOriginalName());
+        } else {
+            $dish->image = 'http://demo.laravelmix.local:81/api/image/dish/default.png';
+        }
+        $dish->save();
+        return response()->json($dish);
     }
 
     /**
@@ -45,7 +62,7 @@ class DishController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(Dish::find($id));
     }
 
     /**
@@ -66,9 +83,22 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DishRequest $request, $id)
     {
-        //
+        $dish = Dish::find($id);
+        $dish->type_id = $request->type_id;
+        $dish->name = $request->name;
+        $dish->price = $request->price;
+        $dish->description = $request->description;
+        if ($request->hasFile('image')) {
+            $tempImage = $dish->image;
+            Storage::delete('public/dish/' . substr($tempImage, strrpos($tempImage, '/') + 1));
+            $file = $request->image;
+            $dish->image = 'http://demo.laravelmix.local:81/api/image/dish/' . $file->getClientOriginalName();
+            $file->storeAs('public/dish', $file->getClientOriginalName());
+        }
+        $dish->save();
+        return response()->json($dish);
     }
 
     /**
@@ -79,6 +109,10 @@ class DishController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dish = Dish::find($id);
+        $tempImage = $dish->image;
+        Storage::delete('public/dish/' . substr($tempImage, strrpos($tempImage, '/') + 1));
+        $dish->delete();
+        return response()->json('ok');
     }
 }

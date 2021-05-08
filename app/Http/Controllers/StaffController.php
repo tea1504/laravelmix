@@ -141,6 +141,8 @@ class StaffController extends Controller
     public function destroy($id)
     {
         $staff = Staff::find($id);
+        $tempImage = $staff->image;
+        Storage::delete('public/user/' . substr($tempImage, strrpos($tempImage, '/') + 1));
         $staff->delete();
         return 'delete';
     }

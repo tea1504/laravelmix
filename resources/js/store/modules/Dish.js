@@ -65,7 +65,7 @@ const mutations = {
 
 const actions = {
   setDish(context, dish) {
-    context.cpmmit('setDish', dish);
+    context.commit('setDish', dish);
   }
 }
 

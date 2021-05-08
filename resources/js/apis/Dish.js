@@ -12,5 +12,8 @@ export default {
   },
   update(form, id) {
     return Api().post('/dish/' + id + '?_method=put', form);
+  },
+  delete(id) {
+    return Api().delete('/dish/' + id);
   }
 }

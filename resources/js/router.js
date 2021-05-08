@@ -38,45 +38,29 @@ export const router = new VueRouter({
         path: '',
         name: 'Home',
         component: Home,
-        meta: {
-          authOnly: true,
-        }
       },
       {
         path: 'staff',
         name: 'Staff',
         component: Staff,
         meta: {
-          authOnly: true,
-          // QuanLyOnly: true,
+          QuanLyOnly: true,
         },
         children: [
           {
             path: '',
             name: 'StaffIndex',
             component: StaffIndex,
-            meta: {
-              authOnly: true,
-              // QuanLyOnly: true,
-            },
           },
           {
             path: 'create',
             name: 'StaffCreate',
             component: StaffCreate,
-            meta: {
-              authOnly: true,
-              // QuanLyOnly: true,
-            },
           },
           {
-            path: '/:id/edit',
+            path: ':id/edit',
             name: 'StaffEdit',
             component: StaffEdit,
-            meta: {
-              authOnly: true,
-              // QuanLyOnly: true,
-            },
           },
         ]
       },
@@ -85,8 +69,7 @@ export const router = new VueRouter({
         name: 'Department',
         component: Department,
         meta: {
-          authOnly: true,
-          //QuanLyOnly: true
+          QuanLyOnly: true
         },
         children: [
           {
@@ -101,8 +84,7 @@ export const router = new VueRouter({
         name: 'Table',
         component: Table,
         meta: {
-          authOnly: true,
-          //QuanLyOnly: true
+          QuanLyOnly: true
         },
         children: [
           {
@@ -117,8 +99,7 @@ export const router = new VueRouter({
         name: 'Type',
         component: Type,
         meta: {
-          authOnly: true,
-          //QuanLyOnly: true
+          QuanLyOnly: true
         },
         children: [
           {
@@ -132,36 +113,23 @@ export const router = new VueRouter({
         name: 'Dish',
         component: Dish,
         meta: {
-          authOnly: true,
-          // QuanLyOnly: true,
+          QuanLyOnly: true,
         },
         children: [
           {
             path: '',
             name: 'DishIndex',
             component: DishIndex,
-            meta: {
-              authOnly: true,
-              // QuanLyOnly: true,
-            },
           },
           {
             path: 'create',
             name: 'DishCreate',
             component: DishCreate,
-            meta: {
-              authOnly: true,
-              // QuanLyOnly: true,
-            },
           },
           {
-            path: '/:id/edit',
+            path: ':id/edit',
             name: 'DishEdit',
             component: DishEdit,
-            meta: {
-              authOnly: true,
-              // QuanLyOnly: true,
-            },
           },
         ]
       },
