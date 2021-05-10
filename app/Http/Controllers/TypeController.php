@@ -91,4 +91,9 @@ class TypeController extends Controller
         $type->delete();
         return response()->json('ok');
     }
+
+    public function getDetail()
+    {
+        return response()->json(Type::with('dishes')->get());
+    }
 }

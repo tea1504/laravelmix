@@ -15,5 +15,11 @@ export default {
   },
   delete(id) {
     return Api().delete('/invoice/' + id);
+  },
+  getDetail(id) {
+    return Api().get('/invoice/detail/' + id);
+  },
+  thanhToan(id) {
+    return Api().post('/invoice/thanhtoan/' + id);
   }
 }

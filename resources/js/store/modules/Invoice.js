@@ -1,6 +1,48 @@
 const state = {
   invoice: [],
-  fieldsInvoice: [],
+  fieldsInvoice: [
+    {
+      key: "id",
+      label: "ID",
+      sortable: true
+    },
+    {
+      key: "date",
+      label: "Ngày tạo",
+      sortable: true
+    },
+    {
+      key: "is_paid",
+      label: "Trạng thái",
+      sortable: true
+    },
+    {
+      key: "table",
+      label: "Bàn",
+      sortable: true
+    },
+    {
+      key: "staff",
+      label: "Nhân viên",
+      sortable: true
+    },
+    {
+      key: 'created_at',
+      label: "Ngày tạo",
+      sortable: true,
+    },
+    {
+      key: 'updated_at',
+      label: "Ngày cập nhật",
+      sortable: true,
+    },
+    {
+      key: 'actions',
+      label: 'Actions',
+      tdClass: "text-center",
+      thClass: "text-center",
+    }
+  ],
 }
 
 const getters = {

@@ -16,7 +16,7 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('staff_id');
+            $table->unsignedBigInteger('staff_id')->nullable();
             $table->unsignedBigInteger('table_id');
             $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->boolean('is_paid')->default(false);

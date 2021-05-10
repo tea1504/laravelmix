@@ -15,5 +15,8 @@ export default {
   },
   delete(id) {
     return Api().delete('/table/' + id);
-  }
+  },
+  getBanTrong(){
+    return Api().get('/table/getbantrong');
+  },
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -14,7 +15,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        return response()->json(Invoice::all());
+        return response()->json(Invoice::with('table')->with('staff')->orderBy('is_paid', 'asc', 'date', 'desc')->get());
     }
 
     /**
@@ -35,7 +36,25 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request->all());
+        $request->validate([
+            'table_id' => 'required'
+        ]);
+        $invoice = new Invoice();
+        // $invoice->staff_id = $request->user()->id;
+        $invoice->table_id = $request->table_id;
+        $invoice->date = Carbon::now();
+        $invoice->is_paid = false;
+        $invoice->check_in = Carbon::now();
+        $invoice->save();
+        $i=1;
+        foreach($request->listOrder as $order){
+            $invoice->dishes()->attach($order['dish']['id'],[
+                'numerical_order' => $i++,
+                'amount' => $order['amount'],
+                'price' => $order['dish']['price'],
+            ]);
+        }
+        return response()->json($invoice);
     }
 
     /**
@@ -46,7 +65,7 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        return response()->json(Invoice::find($id));
+        return response()->json(Invoice::with('dishes')->with('table')->find($id));
     }
 
     /**
@@ -69,7 +88,17 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json($request->all());
+        $invoice = Invoice::find($id);
+        $invoice->dishes()->detach();
+        $i=1;
+        foreach($request->listOrder as $order){
+            $invoice->dishes()->attach($order['dish']['id'],[
+                'numerical_order' => $i++,
+                'amount' => $order['amount'],
+                'price' => $order['dish']['price'],
+            ]);
+        }
+        return response()->json($invoice);
     }
 
     /**
@@ -80,6 +109,23 @@ class InvoiceController extends Controller
      */
     public function destroy($id)
     {
+        $invoice = Invoice::find($id);
+        $invoice->dishes()->detach();
+        $invoice->delete();
         return response()->json($id);
+    }
+
+    public function detail($id)
+    {
+        return response()->json(Invoice::find($id)->dishes);
+    }
+    public function thanhtoan(Request $request, $id)
+    {
+        $invoice = Invoice::find($id);
+        $invoice->staff_id = $request->user()->id;
+        $invoice->is_paid = 1;
+        $invoice->check_out = Carbon::now();
+        $invoice->save();
+        return response()->json($invoice);
     }
 }

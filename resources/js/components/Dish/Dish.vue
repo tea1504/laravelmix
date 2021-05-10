@@ -35,7 +35,7 @@ export default {
             this.$swal({
               icon: "error",
               title: "Lỗi",
-              text: "Không lấy lưu dữ liệu. Hãy thử lại sau.",
+              text: "Không lấy dữ liệu. Hãy thử lại sau.",
             });
           }
           this.isLoaded = true;

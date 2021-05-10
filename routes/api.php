@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TableController;
@@ -32,7 +33,12 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::resource('staff', StaffController::class);
   Route::get('department/get', [DepartmentController::class, 'get']);
   Route::resource('department', DepartmentController::class);
+  Route::get('table/getbantrong', [TableController::class, 'getBanTrong']);
   Route::resource('table', TableController::class);
+  Route::get('type/detail', [TypeController::class, 'getDetail']);
   Route::resource('type', TypeController::class);
   Route::resource('dish', DishController::class);
+  Route::get('invoice/detail/{id}', [InvoiceController::class, 'detail']);
+  Route::post('invoice/thanhtoan/{id}', [InvoiceController::class, 'thanhtoan']);
+  Route::resource('invoice', InvoiceController::class);
 });

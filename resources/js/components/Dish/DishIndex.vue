@@ -76,6 +76,9 @@
         <template #cell(created_at)="row">
           {{ row.value | date }}
         </template>
+        <template #cell(price)="row">
+          {{ row.value | money }}
+        </template>
         <template #cell(updated_at)="row">
           {{ row.value | date }}
         </template>
@@ -181,6 +184,11 @@ export default {
   watch: {
     getDish: function (val) {
       this.totalRows = val.length;
+    },
+  },
+  filters: {
+    money: function (value) {
+      return new Intl.NumberFormat("de-DE").format(value) + " vnđ";
     },
   },
 };

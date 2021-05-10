@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TableRequest;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TableController extends Controller
 {
@@ -90,5 +91,11 @@ class TableController extends Controller
         $table = Table::find($id);
         $table->delete();
         return response()->json('ok');
+    }
+
+    public function getBanTrong()
+    {
+        $res = Table::whereDoesntHave('invoices', function($query){$query->where('is_paid', 0);})->get();
+        return response()->json($res);
     }
 }

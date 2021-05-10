@@ -15,5 +15,8 @@ export default {
   },
   delete(id) {
     return Api().delete('/type/' + id);
+  },
+  getDetail(){
+    return Api().get('/type/detail');
   }
 }

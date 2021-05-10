@@ -26,6 +26,7 @@ import Invoice from './components/Invoice/Invoice.vue'
 import InvoiceIndex from './components/Invoice/InvoiceIndex.vue'
 import InvoiceCreate from './components/Invoice/InvoiceCreate.vue'
 import InvoiceEdit from './components/Invoice/InvoiceEdit.vue'
+import InvoiceShow from './components/Invoice/InvoiceShow.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -160,6 +161,11 @@ export const router = new VueRouter({
             path: ':id/edit',
             name: 'InvoiceEdit',
             component: InvoiceEdit,
+          },
+          {
+            path: ':id',
+            name: 'InvoiceShow',
+            component: InvoiceShow,
           },
         ]
       },
