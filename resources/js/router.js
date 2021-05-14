@@ -27,6 +27,8 @@ import InvoiceIndex from './components/Invoice/InvoiceIndex.vue'
 import InvoiceCreate from './components/Invoice/InvoiceCreate.vue'
 import InvoiceEdit from './components/Invoice/InvoiceEdit.vue'
 import InvoiceShow from './components/Invoice/InvoiceShow.vue'
+import User from './components/User/User.vue'
+import UserIndex from './components/User/UserIndex.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -166,6 +168,21 @@ export const router = new VueRouter({
             path: ':id',
             name: 'InvoiceShow',
             component: InvoiceShow,
+          },
+        ]
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: User,
+        meta: {
+          // QuanLyOnly: true,
+        },
+        children: [
+          {
+            path: '',
+            name: 'UserIndex',
+            component: UserIndex,
           },
         ]
       },

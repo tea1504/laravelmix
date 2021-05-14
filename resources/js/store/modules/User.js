@@ -4,12 +4,16 @@ const state = {
         lastName: '',
         image: '',
         department_id: 0,
-    }
+    },
+    userInfo: {},
 }
 
 const getters = {
     getUser: state => {
         return state.user;
+    },
+    getUserInfo: state => {
+        return state.userInfo;
     },
     isQuanLy: state => {
         return state.user.department_id == 1
@@ -28,13 +32,19 @@ const getters = {
 const mutations = {
     setUser(state, user) {
         state.user = user;
-    }
+    },
+    setUserInfo(state, user) {
+        state.userInfo = user;
+    },
 }
 
 const actions = {
     setUser(context, user){
         context.commit('setUser', user);
-    }
+    },
+    setUserInfo(context, user){
+        context.commit('setUserInfo', user);
+    },
 }
 
 export default {

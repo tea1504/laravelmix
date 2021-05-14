@@ -112,6 +112,7 @@ class StaffController extends Controller
      */
     public function update(StaffRequest $request, $id)
     {
+        // dd($request->user());
         $staff = Staff::find($id);
         $staff->department_id = $request->department_id;
         $staff->first_name = $request->first_name;

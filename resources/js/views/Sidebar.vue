@@ -19,7 +19,7 @@
           <img :src="getUser.image" class="img-circle elevation-2" alt="User" />
         </div>
         <div class="info">
-          <a href="#" class="d-block"
+          <a style="cursor: pointer;" @click="$router.push({name:'UserIndex'})" class="d-block"
             >{{ getUser.lastName }} {{ getUser.firstName }}</a
           >
         </div>

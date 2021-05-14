@@ -100,7 +100,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setUser"]),
+    ...mapMutations(["setUser", "setUserInfo"]),
     login() {
       this.isLoaded = false;
       User.login(this.form)
@@ -113,6 +113,7 @@ export default {
               this.user.image = res.data.image;
               this.user.department_id = res.data.department_id;
               this.setUser(this.user);
+              this.setUserInfo(res.data);
               this.isLoaded = true;
               if (this.$route.query.redirect) {
                 this.$router.push(this.$route.query.redirect);

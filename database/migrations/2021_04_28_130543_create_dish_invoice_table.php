@@ -20,7 +20,7 @@ class CreateDishInvoiceTable extends Migration
             $table->unsignedInteger('numerical_order');
             $table->integer('amount');
             $table->float('price');
-            $table->boolean('status')->default(false);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
             $table->foreign('invoice_id')->references('id')->on('invoices');
