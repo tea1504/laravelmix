@@ -38,7 +38,7 @@
       </b-modal>
       <list-oder :listOrder="invoice.listOrder" :edit="edit" :xoa="xoa" />
       <b-button class="bg-teal" @click="create">Lưu</b-button>
-      <b-button :to="{ name: 'InvoiceIndex' }">Trở về</b-button>
+      <b-button @click="back">Trở về</b-button>
     </b-card>
   </div>
 </template>
@@ -64,33 +64,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setInvoice"]),
-    invoiceIndex() {
-      this.$emit("loading");
-      Invoice.index()
-        .then((res) => {
-          this.setInvoice(res.data);
-          this.$emit("loaded");
-        })
-        .catch((err) => {
-          if (err.response.status == 401) {
-            localStorage.removeItem("token");
-            this.$router.push({
-              name: "Login",
-              query: {
-                redirect: to.fullPath,
-              },
-            });
-          } else {
-            this.$swal({
-              icon: "error",
-              title: "Lỗi",
-              text: "Không lấy dữ liệu. Hãy thử lại sau.",
-            });
-          }
-          this.$emit("loaded");
-        });
-    },
     getBanTrong() {
       this.$emit("loading");
       Table.getBanTrong()
@@ -148,17 +121,34 @@ export default {
     create() {
       Invoice.create(this.invoice)
         .then((res) => {
+          this.table = [];
           this.getBanTrong();
-          this.invoiceIndex();
           this.invoice.table_id = null;
           this.invoice.listOrder = [];
           this.errors = {};
         })
         .catch((err) => {
-          if (err.response.status == 422) {
+          if (err.response.status == 401) {
+            localStorage.removeItem("token");
+            this.$router.push({
+              name: "Login",
+              query: { redirect: to.fullPath },
+            });
+          } else if (err.response.status == 422) {
             this.errors = err.response.data.errors;
+          } else {
+            this.$swal({
+              icon: "error",
+              title: "Lỗi",
+              text: "Không thể lấy dữ liệu. Hãy thử lại sau.",
+            });
           }
         });
+    },
+    back() {
+      if (this.$route.query.table) {
+        this.$router.push({ name: "GoiMon" });
+      } else this.$router.push({ name: "InvoiceIndex" });
     },
   },
   filters: {

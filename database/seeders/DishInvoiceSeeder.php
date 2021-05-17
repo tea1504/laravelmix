@@ -28,7 +28,7 @@ class DishInvoiceSeeder extends Seeder
                     'numerical_order' => $j,
                     'amount' => $faker->numberBetween(1, 3),
                     'price' => 1000 * $faker->numberBetween(10, 300),
-                    'status' => true,
+                    'status' => 2,
                     'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                     'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);

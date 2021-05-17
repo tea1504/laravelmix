@@ -12,7 +12,7 @@
           </div>
         </div>
       </b-col>
-      <b-col>
+      <b-col @click="$router.push({name: 'MonCho'})" style="cursor: pointer;">
         <div class="small-box bg-info">
           <div class="inner">
             <h3>Danh sách món chờ</h3>

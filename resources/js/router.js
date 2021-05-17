@@ -29,6 +29,10 @@ import InvoiceEdit from './components/Invoice/InvoiceEdit.vue'
 import InvoiceShow from './components/Invoice/InvoiceShow.vue'
 import User from './components/User/User.vue'
 import UserIndex from './components/User/UserIndex.vue'
+import GoiMon from './components/GoiMon/GoiMon.vue'
+import ThemMon from './components/ThemMon/ThemMon.vue'
+import MonCho from './components/MonCho/MonCho.vue'
+import LenMon from './components/LenMon/LenMon.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -45,6 +49,26 @@ export const router = new VueRouter({
         path: '',
         name: 'Home',
         component: Home,
+      },
+      {
+        path: 'goimon',
+        name: 'GoiMon',
+        component: GoiMon,
+      },
+      {
+        path: 'themmon',
+        name: 'ThemMon',
+        component: ThemMon,
+      },
+      {
+        path: 'moncho',
+        name: 'MonCho',
+        component: MonCho,
+      },
+      {
+        path: 'lenmon',
+        name: 'LenMon',
+        component: LenMon,
       },
       {
         path: 'staff',

@@ -98,4 +98,9 @@ class TableController extends Controller
         $res = Table::whereDoesntHave('invoices', function($query){$query->where('is_paid', 0);})->get();
         return response()->json($res);
     }
+    public function getBanPhucVu()
+    {
+        $res = Table::whereHas('invoices', function($query){$query->where('is_paid', 0);})->get();
+        return response()->json($res);
+    }
 }

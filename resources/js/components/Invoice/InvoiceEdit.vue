@@ -28,7 +28,7 @@
       </b-modal>
       <list-oder :listOrder="invoice.listOrder" :edit="edit" :xoa="xoa" />
       <b-button class="bg-teal" @click="update">Lưu</b-button>
-      <b-button :to="{ name: 'InvoiceIndex' }">Trở về</b-button>
+      <b-button @click="back">Trở về</b-button>
     </b-card>
   </div>
 </template>
@@ -145,6 +145,11 @@ export default {
           });
         })
         .catch((err) => {});
+    },
+    back() {
+      if (this.$route.query.table) {
+        this.$router.push({ name: "ThemMon" });
+      } else this.$router.push({ name: "InvoiceIndex" });
     },
   },
   filters: {

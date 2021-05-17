@@ -7,7 +7,7 @@
           ><i class="fab fa-accessible-icon"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="#" @click="$router.push({name: 'Home'})" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a @click.prevent="logout" style="cursor: pointer;" class="nav-link">Đăng xuất</a>

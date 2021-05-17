@@ -19,4 +19,7 @@ export default {
   getBanTrong(){
     return Api().get('/table/getbantrong');
   },
+  getBanPhucVu(){
+    return Api().get('/table/getbanphucvu');
+  },
 }
