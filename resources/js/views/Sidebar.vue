@@ -19,7 +19,10 @@
           <img :src="getUser.image" class="img-circle elevation-2" alt="User" />
         </div>
         <div class="info">
-          <a style="cursor: pointer;" @click="$router.push({name:'UserIndex'})" class="d-block"
+          <a
+            style="cursor: pointer"
+            @click="$router.push({ name: 'UserIndex' })"
+            class="d-block"
             >{{ getUser.lastName }} {{ getUser.firstName }}</a
           >
         </div>
@@ -31,19 +34,21 @@
           role="menu"
           data-accordion="false"
         >
+          <li class="nav-item">
+            <router-link tag="a" class="nav-link" :to="{ name: 'Home' }"
+              ><i class="nav-icon fas fa-address-book"></i>
+              <p>Home</p></router-link
+            >
+          </li>
+          <li class="nav-header" v-if="isQuanLy || isThuNgan || isBep">
+            QUẢN LÝ
+          </li>
           <li class="nav-item" v-if="isQuanLy">
             <router-link tag="a" class="nav-link" :to="{ name: 'StaffIndex' }"
               ><i class="nav-icon fas fa-address-book"></i>
               <p>Nhân viên</p></router-link
             >
           </li>
-        </ul>
-        <ul
-          class="nav nav-pills nav-sidebar flex-column"
-          data-widget="treeview"
-          role="menu"
-          data-accordion="false"
-        >
           <li class="nav-item" v-if="isQuanLy">
             <router-link
               tag="a"
@@ -53,56 +58,35 @@
               <p>Bộ phận</p></router-link
             >
           </li>
-        </ul>
-        <ul
-          class="nav nav-pills nav-sidebar flex-column"
-          data-widget="treeview"
-          role="menu"
-          data-accordion="false"
-        >
           <li class="nav-item" v-if="isQuanLy">
             <router-link tag="a" class="nav-link" :to="{ name: 'TableIndex' }"
               ><i class="nav-icon fas fa-address-book"></i>
               <p>Bàn</p></router-link
             >
           </li>
-        </ul>
-        <ul
-          class="nav nav-pills nav-sidebar flex-column"
-          data-widget="treeview"
-          role="menu"
-          data-accordion="false"
-        >
-          <li class="nav-item" v-if="isQuanLy">
+          <li class="nav-item" v-if="isQuanLy || isBep">
             <router-link tag="a" class="nav-link" :to="{ name: 'TypeIndex' }"
               ><i class="nav-icon fas fa-address-book"></i>
               <p>Loại món ăn</p></router-link
             >
           </li>
-        </ul>
-        <ul
-          class="nav nav-pills nav-sidebar flex-column"
-          data-widget="treeview"
-          role="menu"
-          data-accordion="false"
-        >
-          <li class="nav-item" v-if="isQuanLy">
+          <li class="nav-item" v-if="isQuanLy || isBep">
             <router-link tag="a" class="nav-link" :to="{ name: 'DishIndex' }"
               ><i class="nav-icon fas fa-address-book"></i>
               <p>Món ăn</p></router-link
             >
           </li>
-        </ul>
-        <ul
-          class="nav nav-pills nav-sidebar flex-column"
-          data-widget="treeview"
-          role="menu"
-          data-accordion="false"
-        >
-          <li class="nav-item" v-if="isQuanLy">
+          <li class="nav-item" v-if="isQuanLy || isThuNgan">
             <router-link tag="a" class="nav-link" :to="{ name: 'InvoiceIndex' }"
               ><i class="nav-icon fas fa-address-book"></i>
               <p>Hóa đơn</p></router-link
+            >
+          </li>
+          <li class="nav-header" v-if="isQuanLy">BÁO CÁO</li>
+          <li class="nav-item" v-if="isQuanLy || isThuNgan">
+            <router-link tag="a" class="nav-link" :to="{ name: 'DoanhThu' }"
+              ><i class="nav-icon fas fa-address-book"></i>
+              <p>Doanh thu</p></router-link
             >
           </li>
         </ul>
@@ -114,7 +98,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getUser", "isQuanLy"]),
+    ...mapGetters(["getUser", "isQuanLy", "isThuNgan", "isBep", "isPhucVu"]),
   },
 };
 </script>

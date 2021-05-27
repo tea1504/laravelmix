@@ -33,6 +33,7 @@ import GoiMon from './components/GoiMon/GoiMon.vue'
 import ThemMon from './components/ThemMon/ThemMon.vue'
 import MonCho from './components/MonCho/MonCho.vue'
 import LenMon from './components/LenMon/LenMon.vue'
+import DoanhThu from './components/BaoCao/DoanhThu.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -49,33 +50,56 @@ export const router = new VueRouter({
         path: '',
         name: 'Home',
         component: Home,
+        meta: {
+          authOnly: true
+        },
       },
       {
         path: 'goimon',
         name: 'GoiMon',
         component: GoiMon,
+        meta: {
+          PhucVuOnly: true
+        },
       },
       {
         path: 'themmon',
         name: 'ThemMon',
         component: ThemMon,
+        meta: {
+          PhucVuOnly: true
+        },
       },
       {
         path: 'moncho',
         name: 'MonCho',
         component: MonCho,
+        meta: {
+          BepOnly: true
+        },
       },
       {
         path: 'lenmon',
         name: 'LenMon',
         component: LenMon,
+        meta: {
+          PhucVuOnly: true
+        },
+      },
+      {
+        path: 'doanhthu',
+        name: 'DoanhThu',
+        component: DoanhThu,
+        meta: {
+          QuanLyOnly: true,
+        }
       },
       {
         path: 'staff',
         name: 'Staff',
         component: Staff,
         meta: {
-          // QuanLyOnly: true,
+          QuanLyOnly: true,
         },
         children: [
           {
@@ -100,7 +124,7 @@ export const router = new VueRouter({
         name: 'Department',
         component: Department,
         meta: {
-          // QuanLyOnly: true
+          QuanLyOnly: true
         },
         children: [
           {
@@ -115,7 +139,7 @@ export const router = new VueRouter({
         name: 'Table',
         component: Table,
         meta: {
-          // QuanLyOnly: true
+          QuanLyOnly: true
         },
         children: [
           {
@@ -130,7 +154,8 @@ export const router = new VueRouter({
         name: 'Type',
         component: Type,
         meta: {
-          // QuanLyOnly: true
+          QuanLyOnly: true,
+          BepOnly: true,
         },
         children: [
           {
@@ -145,7 +170,8 @@ export const router = new VueRouter({
         name: 'Dish',
         component: Dish,
         meta: {
-          // QuanLyOnly: true,
+          QuanLyOnly: true,
+          BepOnly: true,
         },
         children: [
           {
@@ -170,7 +196,8 @@ export const router = new VueRouter({
         name: 'Invoice',
         component: Invoice,
         meta: {
-          // QuanLyOnly: true,
+          QuanLyOnly: true,
+          ThuNganOnly: true,
         },
         children: [
           {
@@ -199,9 +226,6 @@ export const router = new VueRouter({
         path: 'user',
         name: 'User',
         component: User,
-        meta: {
-          // QuanLyOnly: true,
-        },
         children: [
           {
             path: '',

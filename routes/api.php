@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaoCaoController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\ImageController;
@@ -48,4 +49,6 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::get('lenmon', [OtherController::class, 'lenMon']);
   Route::post('dalen/{id}', [OtherController::class, 'daLen']);
   Route::get('demmoncho', [OtherController::class, 'demMonCho']);
+  Route::post('baocao/doanhthutheonam', [BaoCaoController::class, 'DoanhThuTheoNam']);
+  Route::post('baocao/doanhthutheothang', [BaoCaoController::class, 'DoanhThuTheoThang']);
 });

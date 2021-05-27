@@ -28,9 +28,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 import App from './views/App'
-
-import User from './apis/User'
-
+/*
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.authOnly)) {
     if (!localStorage.getItem('token')) {
@@ -42,27 +40,72 @@ router.beforeEach((to, from, next) => {
       })
     } else {
       if (to.matched.some(record => record.meta.QuanLyOnly)) {
-        if(store.getters.isQuanLy){
+        if (store.getters.isQuanLy) {
+          next();
+        }
+        else if (to.matched.some(record => record.meta.BepOnly)) {
+          if (store.getters.isBep) {
+            next();
+          }
+          else
+            next({
+              name: 'error403'
+            })
+        }
+        else if (to.matched.some(record => record.meta.ThuNganOnly)) {
+          if (store.getters.isThuNgan) {
+            next();
+          }
+          else
+            next({
+              name: 'error403'
+            })
+        }
+        else
+          next({
+            name: 'error403'
+          })
+      }
+      else if (to.matched.some(record => record.meta.ThuNganOnly)) {
+        if (store.getters.isThuNgan) {
           next();
         }
         else
-        next({
-          name: 'error403'
-        })
+          next({
+            name: 'error403'
+          })
+      }
+      else if (to.matched.some(record => record.meta.BepOnly)) {
+        if (store.getters.isBep) {
+          next();
+        }
+        else
+          next({
+            name: 'error403'
+          })
+      }
+      else if (to.matched.some(record => record.meta.PhucVuOnly)) {
+        if (store.getters.isPhucVu) {
+          next();
+        }
+        else
+          next({
+            name: 'error403'
+          })
       }
       else
         next();
     };
   } else if (to.matched.some(record => record.meta.guestOnly)) {
     if (localStorage.getItem('token')) {
-      next({name: 'Home'})
+      next({ name: 'Home' })
     } else next();
   }
   else {
     next();
   }
 })
-
+*/
 Vue.filter('date', function (value) {
   if (!value) return '';
   var d = new Date(value);
