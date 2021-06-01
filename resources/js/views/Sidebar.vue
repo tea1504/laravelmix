@@ -36,8 +36,8 @@
         >
           <li class="nav-item">
             <router-link tag="a" class="nav-link" :to="{ name: 'Home' }"
-              ><i class="nav-icon fas fa-address-book"></i>
-              <p>Home</p></router-link
+              ><i class="fas fa-home"></i>
+              <p>Trang chủ</p></router-link
             >
           </li>
           <li class="nav-header" v-if="isQuanLy || isThuNgan || isBep">
@@ -45,7 +45,7 @@
           </li>
           <li class="nav-item" v-if="isQuanLy">
             <router-link tag="a" class="nav-link" :to="{ name: 'StaffIndex' }"
-              ><i class="nav-icon fas fa-address-book"></i>
+              ><i class="nav-icon fas fa-address-card"></i>
               <p>Nhân viên</p></router-link
             >
           </li>
@@ -60,32 +60,32 @@
           </li>
           <li class="nav-item" v-if="isQuanLy">
             <router-link tag="a" class="nav-link" :to="{ name: 'TableIndex' }"
-              ><i class="nav-icon fas fa-address-book"></i>
+              ><i class="nav-icon fas fa-chair"></i>
               <p>Bàn</p></router-link
             >
           </li>
           <li class="nav-item" v-if="isQuanLy || isBep">
             <router-link tag="a" class="nav-link" :to="{ name: 'TypeIndex' }"
-              ><i class="nav-icon fas fa-address-book"></i>
+              ><i class="nav-icon fas fa-align-left"></i>
               <p>Loại món ăn</p></router-link
             >
           </li>
           <li class="nav-item" v-if="isQuanLy || isBep">
             <router-link tag="a" class="nav-link" :to="{ name: 'DishIndex' }"
-              ><i class="nav-icon fas fa-address-book"></i>
+              ><i class="nav-icon fas fa-hamburger"></i>
               <p>Món ăn</p></router-link
             >
           </li>
           <li class="nav-item" v-if="isQuanLy || isThuNgan">
             <router-link tag="a" class="nav-link" :to="{ name: 'InvoiceIndex' }"
-              ><i class="nav-icon fas fa-address-book"></i>
+              ><i class="nav-icon fas fa-file-invoice"></i>
               <p>Hóa đơn</p></router-link
             >
           </li>
           <li class="nav-header" v-if="isQuanLy">BÁO CÁO</li>
           <li class="nav-item" v-if="isQuanLy || isThuNgan">
             <router-link tag="a" class="nav-link" :to="{ name: 'DoanhThu' }"
-              ><i class="nav-icon fas fa-address-book"></i>
+              ><i class="nav-icon fas fa-chart-area"></i>
               <p>Doanh thu</p></router-link
             >
           </li>

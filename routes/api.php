@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::resource('department', DepartmentController::class);
   Route::get('table/getbantrong', [TableController::class, 'getBanTrong']);
   Route::get('table/getbanphucvu', [TableController::class, 'getBanPhucVu']);
+  Route::get('table/getban', [TableController::class, 'getBan']);
   Route::resource('table', TableController::class);
   Route::get('type/detail', [TypeController::class, 'getDetail']);
   Route::resource('type', TypeController::class);

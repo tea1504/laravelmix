@@ -2,7 +2,7 @@
   <div>
     <spinner v-if="!isLoaded" />
     <b-card
-      header="Thêm mới nhân viên"
+      header="Chỉnh sửa thông tin nhân viên"
       header-class="h1 font-weight-bold bg-gradient-teal"
     >
       <b-form-group

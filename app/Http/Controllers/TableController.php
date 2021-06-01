@@ -103,4 +103,8 @@ class TableController extends Controller
         $res = Table::whereHas('invoices', function($query){$query->where('is_paid', 0);})->get();
         return response()->json($res);
     }
+    public function getBan(){
+        $res = DB::select("SELECT a.*, c.id 'invoice_id', c.check_in FROM tables a LEFT JOIN ( SELECT * FROM invoices b WHERE b.is_paid = 0 ) c ON a.id = c.table_id");
+        return response()->json($res);
+    }
 }

@@ -22,4 +22,7 @@ export default {
   getBanPhucVu(){
     return Api().get('/table/getbanphucvu');
   },
+  getBan(){
+    return Api().get("/table/getban");
+  }
 }
