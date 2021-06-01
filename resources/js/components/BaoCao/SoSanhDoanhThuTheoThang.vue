@@ -123,6 +123,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[0] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -134,6 +135,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[1] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -145,6 +147,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[2] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -156,6 +159,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[3] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -167,6 +171,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[4] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -178,6 +183,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[5] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -189,6 +195,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[6] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -200,6 +207,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[7] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -211,6 +219,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[8] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -222,6 +231,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[9] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -233,6 +243,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[10] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });
@@ -244,6 +255,7 @@ export default {
         this.data.datasets.push(temp);
         this.check[11] = true;
         this.check.forEach((e) => {
+          this.isLoaded = true;
           this.isLoaded = this.isLoaded && e;
         });
       });

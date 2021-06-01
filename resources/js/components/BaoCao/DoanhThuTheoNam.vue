@@ -53,7 +53,6 @@ export default {
           res.data.forEach((el) => {
             this.data.datasets[0].data[el.thang - 1] = el.doanhthu;
           });
-          console.log(this.data);
           this.isLoaded = true;
         })
         .catch((err) => {

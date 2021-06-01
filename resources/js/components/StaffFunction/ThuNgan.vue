@@ -1,176 +1,188 @@
 <template>
   <div style="height: 85vh">
-    <b-row class="h-100">
-      <b-col md="4" class="h-100 overflow-auto">
-        <div class="border p-1">
-          <h3>Hóa đơn</h3>
-          <table width="100%">
-            <tr>
-              <th width="20%">
-                <h5>Bàn:</h5>
-              </th>
-              <td>
-                <h5>
-                  {{
-                    getBanTheoID(table_id) == null
-                      ? "Chưa chọn bàn"
-                      : getBanTheoID(table_id).table.name
-                  }}
-                </h5>
-              </td>
-            </tr>
-            <tr>
-              <th width="20%">
-                <h5>Giờ vào:</h5>
-              </th>
-              <td>
-                <h5>
-                  {{
-                    getBanTheoID(table_id) == null
-                      ? "Chưa chọn bàn"
-                      : getBanTheoID(table_id).table.check_in
-                  }}
-                </h5>
-              </td>
-            </tr>
-          </table>
-          <b-table
-            striped
-            hover
-            outlined
-            responsive=""
-            :items="listOrder"
-            :fields="fields"
-          >
-            <template #cell(name)="row">
-              {{ row.item.dish.name }}
-            </template>
-            <template #cell(price)="row">
-              {{ row.item.dish.price | money }}
-            </template>
-            <template #cell(actions)="row">
-              <b-button
-                size="sm"
-                pill
-                style="border: none"
-                @click="minus(row.item.dish)"
-                ><i class="fas fa-minus"></i
-              ></b-button>
-              <b-button
-                size="sm"
-                pill
-                class="bg-teal"
-                style="border: none"
-                @click="plus(row.item.dish)"
-                ><i class="fas fa-plus"></i
-              ></b-button>
-              <b-button
-                size="sm"
-                pill
-                variant="danger"
-                style="border: none"
-                @click="xoa(row.item.dish)"
-                ><i class="fas fa-trash"></i
-              ></b-button>
-            </template>
-          </b-table>
-          <b-button block @click="save()">Lưu</b-button>
-          <b-button
-            block
-            @click="thanhtoan(getBanTheoID(table_id).table.invoice_id)"
-            class="bg-teal border-0"
-            :disabled="
-              table_id == 0 ? true : getBanTheoID(table_id).checked == 0
-            "
-            >Thanh toán</b-button
-          >
-        </div>
-      </b-col>
-      <b-col md="5" class="h-100 border p-1 overflow-auto">
-        <div>
-          <h3>Bàn</h3>
-          <b-row cols="4">
-            <b-col
-              v-for="table in listTable"
-              @click="
-                showListOder(table.table.invoice_id);
-                table_id = table.table.id;
-              "
-              :key="table.table.id"
-            >
-              <div
-                class="text-center myicon"
-                :class="{ selected: table.checked }"
+    <b-container fluid class="h-100">
+      <b-row class="h-100">
+        <b-col md="4" class="h-100">
+          <b-card class="h-100 m-0 overflow-auto">
+            <div>
+              <h3>Hóa đơn</h3>
+              <table width="100%">
+                <tr>
+                  <th width="20%">
+                    <h5>Bàn:</h5>
+                  </th>
+                  <td>
+                    <h5>
+                      {{
+                        getBanTheoID(table_id) == null
+                          ? "Chưa chọn bàn"
+                          : getBanTheoID(table_id).table.name
+                      }}
+                    </h5>
+                  </td>
+                </tr>
+                <tr>
+                  <th width="20%">
+                    <h5>Giờ vào:</h5>
+                  </th>
+                  <td>
+                    <h5>
+                      {{
+                        getBanTheoID(table_id) == null
+                          ? "Chưa chọn bàn"
+                          : getBanTheoID(table_id).table.check_in
+                      }}
+                    </h5>
+                  </td>
+                </tr>
+              </table>
+              <b-table
+                striped
+                hover
+                outlined
+                responsive=""
+                :items="listOrder"
+                :fields="fields"
               >
-                <span>{{ table.table.name }}</span>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
-      <b-col md="3" class="h-100 overflow-auto">
-        <div class="border p-1">
-          <h3>Món ăn</h3>
-          <div class="accordion" role="tablist">
-            <b-card
-              no-body
-              class="mb-1"
-              v-for="type in listDish"
-              :key="type.id"
-            >
-              <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-button
-                  block
-                  @click="$root.$emit('bv::toggle::collapse', 'type' + type.id)"
-                  variant="info"
-                  >{{ type.name }}</b-button
-                >
-              </b-card-header>
-              <b-collapse
-                :id="'type' + type.id"
-                accordion="my-accordion"
-                role="tabpanel"
+                <template #cell(name)="row">
+                  {{ row.item.dish.name }}
+                </template>
+                <template #cell(price)="row">
+                  {{ row.item.dish.price | money }}
+                </template>
+                <template #cell(actions)="row">
+                  <b-button
+                    size="sm"
+                    pill
+                    style="border: none"
+                    @click="minus(row.item.dish)"
+                    ><i class="fas fa-minus"></i
+                  ></b-button>
+                  <b-button
+                    size="sm"
+                    pill
+                    class="bg-teal"
+                    style="border: none"
+                    @click="plus(row.item.dish)"
+                    ><i class="fas fa-plus"></i
+                  ></b-button>
+                  <b-button
+                    size="sm"
+                    pill
+                    variant="danger"
+                    style="border: none"
+                    @click="xoa(row.item.dish)"
+                    ><i class="fas fa-trash"></i
+                  ></b-button>
+                </template>
+              </b-table>
+              <b-button block @click="save()">Lưu</b-button>
+              <b-button
+                block
+                @click="thanhtoan(getBanTheoID(table_id).table.invoice_id)"
+                class="bg-teal border-0"
+                :disabled="
+                  table_id == 0 ? true : getBanTheoID(table_id).checked == 0
+                "
+                >Thanh toán</b-button
               >
-                <b-card-body>
-                  <b-row cols="2">
-                    <b-col
-                      v-for="dish in type.dishes"
-                      :key="dish.id"
-                      class="mt-2"
-                      style="cursor: pointer"
-                      @click="add(dish, 1)"
-                      v-b-modal.modal-multi-3
+            </div>
+          </b-card>
+        </b-col>
+        <b-col md="5" class="h-100 border p-0">
+          <b-card class="h-100 m-0 overflow-auto">
+            <div>
+              <h3>Bàn</h3>
+              <b-container fluid class="h-100">
+                <b-row cols="4">
+                  <b-col
+                    v-for="table in listTable"
+                    @click="
+                      showListOder(table.table.invoice_id);
+                      table_id = table.table.id;
+                    "
+                    :key="table.table.id"
+                  >
+                    <div
+                      class="text-center myicon"
+                      :class="{ selected: table.checked }"
                     >
-                      <div style="position: relative; height: 150px">
-                        <b-img
-                          thumbnail
-                          fluid
-                          :src="dish.image"
-                          :alt="dish.name"
-                          style="position: absolute; top: 0; right: 0"
-                        ></b-img>
-                        <span
-                          style="position: absolute; bottom: 0"
-                          class="text-center bg-dark text-white w-100"
+                      <span>{{ table.table.name }}</span>
+                    </div>
+                  </b-col>
+                </b-row>
+              </b-container>
+            </div>
+          </b-card>
+        </b-col>
+        <b-col md="3" class="h-100">
+          <b-card class="h-100 overflow-auto">
+            <div>
+              <h3>Món ăn</h3>
+              <div class="accordion" role="tablist">
+                <b-card
+                  no-body
+                  class="mb-1"
+                  v-for="type in listDish"
+                  :key="type.id"
+                >
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button
+                      block
+                      @click="
+                        $root.$emit('bv::toggle::collapse', 'type' + type.id)
+                      "
+                      variant="info"
+                      >{{ type.name }}</b-button
+                    >
+                  </b-card-header>
+                  <b-collapse
+                    :id="'type' + type.id"
+                    accordion="my-accordion"
+                    role="tabpanel"
+                  >
+                    <b-card-body>
+                      <b-row cols="2">
+                        <b-col
+                          v-for="dish in type.dishes"
+                          :key="dish.id"
+                          class="mt-2"
+                          style="cursor: pointer"
+                          @click="add(dish, 1)"
+                          v-b-modal.modal-multi-3
                         >
-                          {{ dish.name }}
-                        </span>
-                        <span
-                          style="position: absolute; top: 0; right: 0"
-                          class="text-center bg-dark text-white"
-                        >
-                          {{ dish.price | money }}
-                        </span>
-                      </div>
-                    </b-col>
-                  </b-row>
-                </b-card-body>
-              </b-collapse>
-            </b-card>
-          </div>
-        </div>
-      </b-col>
-    </b-row>
+                          <div style="position: relative; height: 130px">
+                            <b-img
+                              thumbnail
+                              fluid
+                              :src="dish.image"
+                              :alt="dish.name"
+                              style="position: absolute; top: 0; right: 0"
+                            ></b-img>
+                            <span
+                              style="position: absolute; bottom: 0"
+                              class="text-center bg-dark text-white w-100"
+                            >
+                              {{ dish.name }}
+                            </span>
+                            <span
+                              style="position: absolute; top: 0; right: 0"
+                              class="text-center bg-dark text-white"
+                            >
+                              {{ dish.price | money }}
+                            </span>
+                          </div>
+                        </b-col>
+                      </b-row>
+                    </b-card-body>
+                  </b-collapse>
+                </b-card>
+              </div>
+            </div>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -403,7 +415,10 @@ export default {
     },
     thanhtoan(id) {
       this.$swal({
-        title: "Thanh toán hóa đơn " + this.getBanTheoID(this.table_id).table.name + " ?",
+        title:
+          "Thanh toán hóa đơn " +
+          this.getBanTheoID(this.table_id).table.name +
+          " ?",
         showCancelButton: true,
         confirmButtonText: `Thanh toán`,
       }).then((result) => {

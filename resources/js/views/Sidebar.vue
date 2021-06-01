@@ -36,7 +36,7 @@
         >
           <li class="nav-item">
             <router-link tag="a" class="nav-link" :to="{ name: 'Home' }"
-              ><i class="fas fa-home"></i>
+              ><i class="nav-icon fas fa-home"></i>
               <p>Trang chủ</p></router-link
             >
           </li>

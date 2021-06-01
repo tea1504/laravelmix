@@ -152,78 +152,21 @@
       <template #header>
         <h3 class="card-title">
           <i class="fas fa-chart-pie mr-1"></i>
-          Doanh thu theo các ngày trong tháng
+          So sánh doanh thu theo tháng
         </h3>
         <div class="card-tools">
           <ul class="nav nav-pills ml-auto">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                :class="{ active: loaiThang == 1 }"
-                style="cursor: pointer"
-                @click="loaiThang = 1"
-                data-toggle="tab"
-                >Bar</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                :class="{ active: loaiThang == 2 }"
-                style="cursor: pointer"
-                @click="loaiThang = 2"
-                data-toggle="tab"
-                >Horizontal bar</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                :class="{ active: loaiThang == 3 }"
-                style="cursor: pointer"
-                @click="loaiThang = 3"
-                data-toggle="tab"
-                >Line</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                :class="{ active: loaiThang == 4 }"
-                style="cursor: pointer"
-                @click="loaiThang = 4"
-                data-toggle="tab"
-                >Pie</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                :class="{ active: loaiThang == 5 }"
-                style="cursor: pointer"
-                @click="loaiThang = 5"
-                data-toggle="tab"
-                >Doughnut</a
-              >
-            </li>
             <li class="nav-item mx-1">
               <b-form-select
                 :options="yearOpt"
-                v-model="yearLoaiThang"
-              ></b-form-select>
-            </li>
-            <li class="nav-item mx-1">
-              <b-form-select
-                :options="monthOpt"
-                v-model="monthLoaiThang"
+                v-model="yearLoaiThangSS"
               ></b-form-select>
             </li>
           </ul>
         </div>
       </template>
       <so-sanh-doanh-thu-theo-thang
-        :year="yearLoaiThang"
-        :typeChart="loaiThang"
+        :year="yearLoaiThangSS"
       />
     </b-card>
   </div>
@@ -244,6 +187,7 @@ export default {
       monthLoaiThang: 1,
       loaiNam: 1,
       loaiThang: 3,
+      yearLoaiThangSS: 2021,
     };
   },
   methods: {
