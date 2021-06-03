@@ -15,5 +15,8 @@ export default {
   },
   delete(id) {
     return Api().delete('/dish/' + id);
+  },
+  setStatus(){
+    return Api().get('/dish/setstatus');
   }
 }

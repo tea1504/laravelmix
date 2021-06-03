@@ -86,6 +86,7 @@ class DishSeeder extends Seeder
                 'Canh hến nấu chua',
             ]
         ];
+        $k = 1;
         for ($i = 1; $i <= count($type); $i++) {
             for ($j = 1; $j <= count($type[$i - 1]); $j++) {
                 $price = 0;
@@ -110,11 +111,13 @@ class DishSeeder extends Seeder
                     'type_id' => $i,
                     'name' => $type[$i - 1][$j - 1],
                     'price' => $price,
+                    // 'image' => 'http://demo.laravelmix.local:81/api/image/dish/'.$k.'.png',
                     'image' => $faker->imageUrl(400, 400),
                     'description' => $faker->text(),
                     'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                     'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
+                $k++;
             }
         }
         DB::table('dishes')->insert($list);

@@ -20,6 +20,62 @@ class StaffSeeder extends Seeder
         $faker = Faker::create();
         $list = [];
         $numDepartment = 4;
+        array_push($list, [
+            'department_id' => 1,
+            'first_name' => $faker->firstName(),
+            'last_name' => $faker->lastName(),
+            'date_of_birth' => $faker->dateTimeBetween('-50 years', '-25 years', null),
+            'identity_card_number' => $faker->numerify('############'),
+            'phone_number' => $faker->numerify('0#########'),
+            'address' => $faker->address(),
+            'image' => $faker->imageUrl(400, 400),
+            'username' => 'admin',
+            'password' => Hash::make('12345'),
+            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+        ]);
+        array_push($list, [
+            'department_id' => 2,
+            'first_name' => $faker->firstName(),
+            'last_name' => $faker->lastName(),
+            'date_of_birth' => $faker->dateTimeBetween('-50 years', '-25 years', null),
+            'identity_card_number' => $faker->numerify('############'),
+            'phone_number' => $faker->numerify('0#########'),
+            'address' => $faker->address(),
+            'image' => $faker->imageUrl(400, 400),
+            'username' => 'thungan',
+            'password' => Hash::make('12345'),
+            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+        ]);
+        array_push($list, [
+            'department_id' => 3,
+            'first_name' => $faker->firstName(),
+            'last_name' => $faker->lastName(),
+            'date_of_birth' => $faker->dateTimeBetween('-50 years', '-25 years', null),
+            'identity_card_number' => $faker->numerify('############'),
+            'phone_number' => $faker->numerify('0#########'),
+            'address' => $faker->address(),
+            'image' => $faker->imageUrl(400, 400),
+            'username' => 'bep',
+            'password' => Hash::make('12345'),
+            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+        ]);
+        array_push($list, [
+            'department_id' => 4,
+            'first_name' => $faker->firstName(),
+            'last_name' => $faker->lastName(),
+            'date_of_birth' => $faker->dateTimeBetween('-50 years', '-25 years', null),
+            'identity_card_number' => $faker->numerify('############'),
+            'phone_number' => $faker->numerify('0#########'),
+            'address' => $faker->address(),
+            'image' => $faker->imageUrl(400, 400),
+            'username' => 'nhanvien',
+            'password' => Hash::make('12345'),
+            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+        ]);
         for ($i = 1; $i <= $numDepartment; $i++) {
             for ($j = 1; $j <= $i; $j++) {
                 array_push($list, [

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DishRequest;
 use App\Models\Dish;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
@@ -114,5 +116,10 @@ class DishController extends Controller
         Storage::delete('public/dish/' . substr($tempImage, strrpos($tempImage, '/') + 1));
         $dish->delete();
         return response()->json('ok');
+    }
+    public function setStatus()
+    {
+        DB::table('dishes')->update(array('is_serving' => 1, 'updated_at' => Carbon::now()));
+        return response()->json("ok");
     }
 }
