@@ -34,6 +34,7 @@ import ThemMon from './components/ThemMon/ThemMon.vue'
 import MonCho from './components/MonCho/MonCho.vue'
 import LenMon from './components/LenMon/LenMon.vue'
 import DoanhThu from './components/BaoCao/DoanhThu.vue'
+import DanhSachMonAn from './components/DanhSachMonAn/DanhSachMonAn.vue'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -92,6 +93,14 @@ export const router = new VueRouter({
         component: DoanhThu,
         meta: {
           QuanLyOnly: true,
+        }
+      },
+      {
+        path: 'danhsachmonan',
+        name: 'DanhSachMonAn',
+        component: DanhSachMonAn,
+        meta: {
+          BepOnly: true,
         }
       },
       {

@@ -1,25 +1,29 @@
 <template>
-  <div class="p-1">
-    <b-button :to="{name: 'Home'}">Trở về</b-button>
-    <b-row cols="1">
-      <b-col v-for="monCho in ListMonCho" :key="monCho.id">
-        <b-card
-          :img-src="monCho.image"
-          img-height="200"
-          img-alt="Card image"
-          img-left
-          class="mb-3"
-        >
-          <b-card-text>
-            <h3>{{ monCho.name }}</h3>
-            <p><b>Số lượng:</b> {{ monCho.amount }}</p>
-            <p><b>Bàn:</b> {{ monCho.table_name }}</p>
-            <b-button @click="daCheBien(monCho.id)">Đã chế biến xong</b-button>
-          </b-card-text>
-        </b-card>
-      </b-col>
-    </b-row>
-    <spinner v-if="!isLoaded" />
+  <div class="h-100 p-1">
+    <h3>Món chờ chế biến</h3>
+    <b-container fluid style="height: 78vh" class="overflow-auto">
+      <b-row cols="1">
+        <b-col v-for="monCho in ListMonCho" :key="monCho.id">
+          <b-card
+            :img-src="monCho.image"
+            img-height="200"
+            img-alt="Card image"
+            img-left
+            class="mb-3"
+          >
+            <b-card-text>
+              <h3>{{ monCho.name }}</h3>
+              <p><b>Số lượng:</b> {{ monCho.amount }}</p>
+              <p><b>Bàn:</b> {{ monCho.table_name }}</p>
+              <b-button @click="daCheBien(monCho.id)"
+                >Đánh dấu đã chế biến</b-button
+              >
+            </b-card-text>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
+    <!-- <spinner v-if="!isLoaded" /> -->
   </div>
 </template>
 
@@ -61,7 +65,7 @@ export default {
     },
     daCheBien(id) {
       this.$swal({
-        title: "Món an đã chế biến xong?",
+        title: "Món ăn đã chế biến xong?",
         showCancelButton: true,
         confirmButtonText: `Đã xong`,
       }).then((result) => {
@@ -69,9 +73,7 @@ export default {
           this.isLoaded = false;
           Other.daCheBien(id)
             .then((res) => {
-              this.$swal("Thao tác thành công").then(() => {
-                this.getMonCho();
-              });
+              this.getMonCho();
               this.isLoaded = true;
             })
             .catch((err) => {

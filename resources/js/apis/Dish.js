@@ -16,7 +16,13 @@ export default {
   delete(id) {
     return Api().delete('/dish/' + id);
   },
-  setStatus(){
+  setStatus() {
     return Api().get('/dish/setstatus');
-  }
+  },
+  khoiPhuc(id) {
+    return Api().get('/dish/khoiphuc/' + id);
+  },
+  hetHang(id) {
+    return Api().get('/dish/hethang/' + id);
+  },
 }

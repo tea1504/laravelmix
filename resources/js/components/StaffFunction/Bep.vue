@@ -2,7 +2,10 @@
   <div>
     <b-container fluid>
       <b-row cols-lg="3" cols-md="2" cols-sm="1">
-        <b-col>
+        <b-col
+          @click="$router.push({ name: 'DanhSachMonAn' })"
+          style="cursor: pointer"
+        >
           <div class="small-box bg-info">
             <div class="inner">
               <h3>Danh sách món ăn</h3>

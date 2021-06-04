@@ -42,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::get('type/detail', [TypeController::class, 'getDetail']);
   Route::resource('type', TypeController::class);
   Route::get('/dish/setstatus', [DishController::class, 'setStatus']);
+  Route::get('/dish/khoiphuc/{id}', [DishController::class, 'khoiPhuc']);
+  Route::get('/dish/hethang/{id}', [DishController::class, 'hetHang']);
   Route::resource('dish', DishController::class);
   Route::get('invoice/detail/{id}', [InvoiceController::class, 'detail']);
   Route::post('invoice/thanhtoan/{id}', [InvoiceController::class, 'thanhtoan']);

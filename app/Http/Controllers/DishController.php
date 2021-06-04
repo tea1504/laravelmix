@@ -18,7 +18,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dish = Dish::with('type')->get();
+        $dish = Dish::with('type')->orderBy('is_serving', 'desc')->get();
         return response()->json($dish);
     }
 
@@ -120,6 +120,18 @@ class DishController extends Controller
     public function setStatus()
     {
         DB::table('dishes')->update(array('is_serving' => 1, 'updated_at' => Carbon::now()));
+        return response()->json("ok");
+    }
+    public function khoiPhuc($id){
+        $dish = Dish::find($id);
+        $dish->is_serving = 1;
+        $dish->save();
+        return response()->json("ok");
+    }
+    public function hetHang($id){
+        $dish = Dish::find($id);
+        $dish->is_serving = 0;
+        $dish->save();
         return response()->json("ok");
     }
 }
