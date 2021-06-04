@@ -8,6 +8,9 @@ class ImageController extends Controller
 {
     public function get($thuMuc, $tenHinh)
     {
-        return response()->download(public_path('storage/'.$thuMuc.'/').$tenHinh);
+        if(file_exists(public_path('storage/'.$thuMuc.'/').$tenHinh))
+            return response()->download(public_path('storage/'.$thuMuc.'/').$tenHinh);
+        else
+            return response()->download(public_path('storage/'.$thuMuc.'/').'default.png');
     }
 }

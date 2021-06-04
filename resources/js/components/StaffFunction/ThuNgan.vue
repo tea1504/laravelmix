@@ -151,7 +151,7 @@
                           @click="add(dish, 1)"
                           v-b-modal.modal-multi-3
                         >
-                          <div style="position: relative; height: 130px">
+                          <div style="position: relative; height: 150px">
                             <b-img
                               thumbnail
                               fluid
@@ -265,12 +265,14 @@ export default {
     },
     showListOder(id) {
       this.listOrder = [];
+      this.total = 0;
       Invoice.show(id)
         .then((res) => {
           Array.from(res.data.dishes).forEach((arr) => {
             var temp = { dish: {}, amount: 0 };
             temp.dish = arr;
             temp.amount = arr.pivot.amount;
+            this.total += temp.dish.price * temp.amount;
             this.listOrder.push(temp);
           });
         })
@@ -419,6 +421,7 @@ export default {
           "Thanh toán hóa đơn " +
           this.getBanTheoID(this.table_id).table.name +
           " ?",
+        text: "Tổng tiền: " + this.total.toLocaleString("vi-VN") + " VNĐ",
         showCancelButton: true,
         confirmButtonText: `Thanh toán`,
       }).then((result) => {

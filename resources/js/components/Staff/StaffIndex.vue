@@ -49,7 +49,11 @@
           {{ row.value.name }}
         </template>
         <template #cell(image)="row">
-          <img :src="row.value" alt="image" height="50px" />
+          <img
+            :src="row.value"
+            alt="image"
+            height="50px"
+          />
         </template>
         <template #cell(date_of_birth)="row">
           {{ row.value | date }}
@@ -130,22 +134,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setStaff']),
-    staffIndex() {
-      this.isLoaded = false;
-      Staff.index()
-        .then((res) => {
-          this.setStaff(res.data);
-          this.isLoaded = true;
-        })
-        .catch((err) => {
-          if (err.response.status == 401) {
-            localStorage.removeItem("token");
-            this.$router.push({ name: "Login" });
-          }
-          this.isLoaded = true;
-        });
-    },
+    ...mapActions(["setStaff"]),
+    // staffIndex() {
+    //   this.isLoaded = false;
+    //   Staff.index()
+    //     .then((res) => {
+    //       this.setStaff(res.data);
+    //       this.isLoaded = true;
+    //     })
+    //     .catch((err) => {
+    //       if (err.response.status == 401) {
+    //         localStorage.removeItem("token");
+    //         this.$router.push({ name: "Login" });
+    //       }
+    //       this.isLoaded = true;
+    //     });
+    // },
     xoa(id) {
       this.$swal({
         title: "Bạn chắc chắn muốn xóa?",
@@ -156,7 +160,7 @@ export default {
           this.isLoaded = false;
           Staff.delete(id)
             .then((res) => {
-              this.$swal('Đã xóa thành công').then(()=>{
+              this.$swal("Đã xóa thành công").then(() => {
                 this.staffIndex();
               });
               this.isLoaded = true;
@@ -183,8 +187,8 @@ export default {
   },
   watch: {
     getStaff: function (val) {
-      console.log('getStaff change');
       this.totalRows = val.length;
+      console.log(this.imageList);
     },
   },
 };
