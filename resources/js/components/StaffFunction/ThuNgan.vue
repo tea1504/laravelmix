@@ -266,6 +266,10 @@ export default {
     showListOder(id) {
       this.listOrder = [];
       this.total = 0;
+      // var index = this.listTable.findIndex(
+      //           (e) => e.table.id == this.table_id
+      //         );
+      // console.log(id);
       Invoice.show(id)
         .then((res) => {
           Array.from(res.data.dishes).forEach((arr) => {
@@ -351,6 +355,7 @@ export default {
             (e) => e.table.id == this.table_id
           );
           this.listTable[index].checked = 1;
+          this.listTable[index].table.invoice_id = res.data.id;
           var now = new Date();
           this.listTable[index].table.check_in =
             now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
@@ -362,10 +367,6 @@ export default {
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener("mouseenter", Swal.stopTimer);
-              toast.addEventListener("mouseleave", Swal.resumeTimer);
-            },
           });
         })
         .catch((err) => {
@@ -433,6 +434,7 @@ export default {
               );
               this.listTable[index].checked = 0;
               this.listTable[index].table.check_in = null;
+              this.listTable[index].table.invoice_id = null;
               this.listOrder = [];
               this.$swal({
                 icon: "success",
@@ -442,10 +444,6 @@ export default {
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener("mouseenter", Swal.stopTimer);
-                  toast.addEventListener("mouseleave", Swal.resumeTimer);
-                },
               });
             })
             .catch((err) => {
