@@ -28,7 +28,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 import App from './views/App'
-/*
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.authOnly)) {
     if (!localStorage.getItem('token')) {
@@ -105,7 +105,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
-*/
+
 Vue.filter('date', function (value) {
   if (!value) return '';
   var d = new Date(value);
